@@ -33,7 +33,8 @@ class Connection
     private $port;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connection")
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;
@@ -45,7 +46,7 @@ class Connection
     private $data;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Database")
+     * @ORM\ManyToOne(targetEntity="BDatabase")
      * @ORM\JoinColumn(nullable=false)
      */
     private $databaseFk;
@@ -115,12 +116,12 @@ class Connection
         return $this;
     }
 
-    public function getDatabaseFk(): ?Database
+    public function getDatabaseFk(): ?BDatabase
     {
         return $this->databaseFk;
     }
 
-    public function setDatabaseFk(?Database $databaseFk): self
+    public function setDatabaseFk(?BDatabase $databaseFk): self
     {
         $this->databaseFk = $databaseFk;
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,16 +33,39 @@ class Project
      */
     private $keepAmount;
 
-    //ONE TO MANY
+    //bidirectional CONNECTION
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
      */
-    private $Connections;
+    private $connections;
 
-    public function __construct()
-    {
-        $this->Connections = new ArrayCollection();
-    }
+
+
+    //bidirectional BDATABASE
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
+     */
+    private $bDatabases;
+
+    //bidirectional BData
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
+     */
+    private $BData;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\StoredProject", mappedBy="project")
+     */
+    private $storedProjects;
+
+
+
 
     /**
      * @return Collection|Connection[]
@@ -48,6 +73,26 @@ class Project
     public function getConnections(): Collection
     {
         return $this->Connections;
+    }
+
+
+    public function __construct()
+    {
+        $this->connections = new ArrayCollection();
+        $this->bDatabases = new ArrayCollection();
+        $this->storedProjects = new ArrayCollection();
+    }
+
+
+
+
+
+    /**
+     * @return Collection|Connection[]
+     */
+    public function getBDatabases(): Collection
+    {
+        return $this->BDatabases;
     }
 
 
@@ -91,6 +136,37 @@ class Project
     public function setKeepAmount(int $keepAmount): self
     {
         $this->keepAmount = $keepAmount;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StoredProject[]
+     */
+    public function getStoredProjects(): Collection
+    {
+        return $this->storedProjects;
+    }
+
+    public function addStoredProject(StoredProject $storedProject): self
+    {
+        if (!$this->storedProjects->contains($storedProject)) {
+            $this->storedProjects[] = $storedProject;
+            $storedProject->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStoredProject(StoredProject $storedProject): self
+    {
+        if ($this->storedProjects->contains($storedProject)) {
+            $this->storedProjects->removeElement($storedProject);
+            // set the owning side to null (unless already changed)
+            if ($storedProject->getProject() === $this) {
+                $storedProject->setProject(null);
+            }
+        }
 
         return $this;
     }

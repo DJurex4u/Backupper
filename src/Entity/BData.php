@@ -27,7 +27,7 @@ class BData
     private $destinationDirectory;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;
