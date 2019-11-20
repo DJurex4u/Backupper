@@ -32,6 +32,12 @@ class BData
      */
     private $project;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bData")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $periodType;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class BData
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    public function getPeriodType(): ?PeriodType
+    {
+        return $this->periodType;
+    }
+
+    public function setPeriodType(?PeriodType $periodType): self
+    {
+        $this->periodType = $periodType;
 
         return $this;
     }

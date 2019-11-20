@@ -38,9 +38,15 @@ class PeriodType
      */
     private $bDatabases;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\BData", mappedBy="periodType")
+     */
+    private $bData;
+
     public function __construct()
     {
         $this->bDatabases = new ArrayCollection();
+        $this->bData = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,37 @@ class PeriodType
             // set the owning side to null (unless already changed)
             if ($bDatabase->getPeriodType() === $this) {
                 $bDatabase->setPeriodType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BData[]
+     */
+    public function getBData(): Collection
+    {
+        return $this->bData;
+    }
+
+    public function addBData(BData $bData): self
+    {
+        if (!$this->bData->contains($bData)) {
+            $this->bData[] = $bData;
+            $bData->setPeriodType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBData(BData $bData): self
+    {
+        if ($this->bData->contains($bData)) {
+            $this->bData->removeElement($bData);
+            // set the owning side to null (unless already changed)
+            if ($bData->getPeriodType() === $this) {
+                $bData->setPeriodType(null);
             }
         }
 
