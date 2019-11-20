@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class PeriodType
      * @ORM\Column(type="datetime")
      */
     private $endDateTime;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\BDatabase", mappedBy="periodType")
+     */
+    private $bDatabases;
+
+    public function __construct()
+    {
+        $this->bDatabases = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +80,37 @@ class PeriodType
     public function setEndDateTime(\DateTimeInterface $endDateTime): self
     {
         $this->endDateTime = $endDateTime;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BDatabase[]
+     */
+    public function getBDatabases(): Collection
+    {
+        return $this->bDatabases;
+    }
+
+    public function addBDatabase(BDatabase $bDatabase): self
+    {
+        if (!$this->bDatabases->contains($bDatabase)) {
+            $this->bDatabases[] = $bDatabase;
+            $bDatabase->setPeriodType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBDatabase(BDatabase $bDatabase): self
+    {
+        if ($this->bDatabases->contains($bDatabase)) {
+            $this->bDatabases->removeElement($bDatabase);
+            // set the owning side to null (unless already changed)
+            if ($bDatabase->getPeriodType() === $this) {
+                $bDatabase->setPeriodType(null);
+            }
+        }
 
         return $this;
     }
