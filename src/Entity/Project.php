@@ -31,6 +31,29 @@ class Project
      */
     private $keepAmount;
 
+    //ONE TO MANY
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
+     */
+    private $Connections;
+
+    public function __construct()
+    {
+        $this->Connections = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Connection[]
+     */
+    public function getConnections(): Collection
+    {
+        return $this->Connections;
+    }
+
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;

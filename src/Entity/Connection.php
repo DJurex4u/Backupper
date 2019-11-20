@@ -33,7 +33,7 @@ class Connection
     private $port;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connection")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;
