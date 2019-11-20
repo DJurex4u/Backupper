@@ -38,6 +38,18 @@ class Connection
      */
     private $project;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Data")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $data;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Database")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $databaseFk;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +99,30 @@ class Connection
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    public function getData(): ?Data
+    {
+        return $this->data;
+    }
+
+    public function setData(?Data $data): self
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    public function getDatabaseFk(): ?Database
+    {
+        return $this->databaseFk;
+    }
+
+    public function setDatabaseFk(?Database $databaseFk): self
+    {
+        $this->databaseFk = $databaseFk;
 
         return $this;
     }
