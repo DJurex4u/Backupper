@@ -46,6 +46,12 @@ class Database
      */
     private $dbSchema;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $project;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +125,18 @@ class Database
     public function setDbSchema(string $dbSchema): self
     {
         $this->dbSchema = $dbSchema;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }
