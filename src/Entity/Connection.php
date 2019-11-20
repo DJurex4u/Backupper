@@ -39,7 +39,7 @@ class Connection
     private $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Data")
+     * @ORM\ManyToOne(targetEntity="BData")
      * @ORM\JoinColumn(nullable=false)
      */
     private $data;
@@ -103,12 +103,12 @@ class Connection
         return $this;
     }
 
-    public function getData(): ?Data
+    public function getData(): ?BData
     {
         return $this->data;
     }
 
-    public function setData(?Data $data): self
+    public function setData(?BData $data): self
     {
         $this->data = $data;
 
