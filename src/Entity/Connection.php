@@ -35,21 +35,21 @@ class Connection
     /**
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
      */
     private $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BData")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\BbData", inversedBy="bData")
+     * @ORM\JoinColumn(nullable=false, name="bData_id", referencedColumnName="id")
      */
-    private $data;
+    private $bData;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BDatabase")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="BDatabase", inversedBy="bDatabases")
+     * @ORM\JoinColumn(nullable=false, name="bDatabase_id", referencedColumnName="id")
      */
-    private $databaseFk;
+    private $bDatabase;
 
     public function getId(): ?int
     {
@@ -104,26 +104,26 @@ class Connection
         return $this;
     }
 
-    public function getData(): ?BData
+    public function getBData(): ?BData
     {
-        return $this->data;
+        return $this->bData;
     }
 
-    public function setData(?BData $data): self
+    public function setBData(?BData $bData): self
     {
-        $this->data = $data;
+        $this->bData = $bData;
 
         return $this;
     }
 
-    public function getDatabaseFk(): ?BDatabase
+    public function getBDatabase(): ?BDatabase
     {
-        return $this->databaseFk;
+        return $this->bDatabase;
     }
 
-    public function setDatabaseFk(?BDatabase $databaseFk): self
+    public function setBDatabase(?BDatabase $bDatabase): self
     {
-        $this->databaseFk = $databaseFk;
+        $this->bDatabase = $bDatabase;
 
         return $this;
     }

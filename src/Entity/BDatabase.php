@@ -47,16 +47,27 @@ class BDatabase
     private $dbSchema;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project, inversedBy= "bDatabases")
+     * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
      */
     private $project;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bDatabases")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="periodType_id", referencedColumnName="id")
      */
     private $periodType;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\PeriodType\Connection", mappedBy="bDatabase")
+     */
+    private $connections;                                  //nema get set
+
+
+    public function __construct() {
+        $this->connections = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -149,7 +160,7 @@ class BDatabase
 
     public function getPeriodType(?PeriodType $periodType): self
     {
-        $this->periodType = periodType;
+        $this->periodType = $periodType;
 
         return $this;
     }

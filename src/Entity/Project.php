@@ -47,7 +47,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\BDatabase", mappedBy="project")
      */
     private $bDatabases;
 
@@ -55,11 +55,13 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="AApp\Entity\BData", mappedBy="project")
      */
-    private $BData;
+    private $bData;
 
     /**
+     *  @var \Doctrine\Common\Collections\ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="App\Entity\StoredProject", mappedBy="project")
      */
     private $storedProjects;
@@ -72,7 +74,7 @@ class Project
      */
     public function getConnections(): Collection
     {
-        return $this->Connections;
+        return $this->connections;
     }
 
 
@@ -92,7 +94,7 @@ class Project
      */
     public function getBDatabases(): Collection
     {
-        return $this->BDatabases;
+        return $this->bDatabases;
     }
 
 

@@ -28,7 +28,7 @@ class BData
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
      */
     private $project;
 
