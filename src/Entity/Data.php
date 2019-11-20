@@ -26,6 +26,12 @@ class Data
      */
     private $destinationDirectory;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $project;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +57,18 @@ class Data
     public function setDestinationDirectory(string $destinationDirectory): self
     {
         $this->destinationDirectory = $destinationDirectory;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }

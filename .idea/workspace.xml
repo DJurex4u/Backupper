@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44ca75d0-f690-467f-b8a0-f4efbd9c3962" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Entity/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/StoredProject.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/StoredProject.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +57,11 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Entity/StoredProject.php">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="7" column="58" lean-forward="true" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -86,6 +90,7 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/Entity/PeriodType.php" />
         <option value="$PROJECT_DIR$/src/Entity/Connection.php" />
+        <option value="$PROJECT_DIR$/src/Entity/StoredProject.php" />
       </list>
     </option>
   </component>
@@ -277,12 +282,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8147000" />
+    <option name="totallyTimeSpent" value="8465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="165" y="31" width="974" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.124726474" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20897156" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -355,7 +361,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/StoredProject.php">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="7" column="58" lean-forward="true" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

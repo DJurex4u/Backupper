@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\StoredProjectRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProjectBackup")
  */
 class StoredProject
 {
