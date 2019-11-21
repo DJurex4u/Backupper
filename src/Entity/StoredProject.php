@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProjectBackup")
+ * @ORM\Entity(repositoryClass="App\Repository\StoredProject")
  */
 class StoredProject
 {
@@ -28,7 +28,7 @@ class StoredProject
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="storedProjects")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
      */
     private $project;
 

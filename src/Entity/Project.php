@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,7 +56,7 @@ class Project
      *
      * @ORM\OneToMany(targetEntity="App\Entity\BData", mappedBy="project")
      */
-    private $bData;
+    private $bDatas;
 
     /**
      *  @var \Doctrine\Common\Collections\ArrayCollection
@@ -69,13 +68,7 @@ class Project
 
 
 
-    /**
-     * @return Collection|Connection[]
-     */
-    public function getConnections(): Collection
-    {
-        return $this->connections;
-    }
+
 
 
     public function __construct()
@@ -83,19 +76,14 @@ class Project
         $this->connections = new ArrayCollection();
         $this->bDatabases = new ArrayCollection();
         $this->storedProjects = new ArrayCollection();
+        $this->bDatas = new ArrayCollection();
     }
 
 
 
 
 
-    /**
-     * @return Collection|Connection[]
-     */
-    public function getBDatabases(): Collection
-    {
-        return $this->bDatabases;
-    }
+
 
 
 
@@ -143,9 +131,9 @@ class Project
     }
 
     /**
-     * @return Collection|StoredProject[]
+     * @return ArrayCollection
      */
-    public function getStoredProjects(): Collection
+    public function getStoredProjects(): ArrayCollection
     {
         return $this->storedProjects;
     }
@@ -172,4 +160,88 @@ class Project
 
         return $this;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getConnections(): ArrayCollection
+    {
+        return $this->connections;
+    }
+
+    public function addConnection(Connection $connection): self
+    {
+        if (!$this->connections->contains($connection)) {
+            $this->connections[] = $connection;
+            $connection->setProject($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBDatabases(): ArrayCollection
+    {
+        return $this->bDatabases;
+    }
+
+    public function addBDatabase(BDatabase $bDatabase): self
+    {
+        if (!$this->bDatabases->contains($bDatabase)) {
+            $this->bDatabases[] = $bDatabase;
+            $bDatabase->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBDatabase(BDatabase $bDatabase): self
+    {
+        if ($this->bDatabases->contains($bDatabase)) {
+            $this->bDatabases->removeElement($bDatabase);
+            // set the owning side to null (unless already changed)
+            if ($bDatabase->getProject() === $this) {
+                $bDatabase->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBDatas(): ArrayCollection
+    {
+        return $this->bDatas;
+    }
+
+    public function addBData(BData $bData): self
+    {
+        if (!$this->bDatas->contains($bData)) {
+            $this->bDatas[] = $bData;
+            $bData->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBData (BDatabase $bData): self
+    {
+        if ($this->bDatas->contains($bData)) {
+            $this->bDatas->removeElement($bData);
+            // set the owning side to null (unless already changed)
+            if ($bData->getProject() === $this) {
+                $bData->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }

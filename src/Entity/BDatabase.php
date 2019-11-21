@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,7 +62,7 @@ class BDatabase
      *
      * @ORM\OneToMany(targetEntity="Connection", mappedBy="bDatabase")
      */
-    private $connections;                                  //nema get set
+    private $connections;
 
 
     public function __construct() {
@@ -158,16 +158,27 @@ class BDatabase
         return $this;
     }
 
-    public function getPeriodType(?PeriodType $periodType): self
+    public function getPeriodType(): self
     {
-        $this->periodType = $periodType;
-
         return $this;
     }
 
     public function setPeriodType(?PeriodType $periodType): self
     {
         $this->periodType = $periodType;
+
+        return $this;
+    }
+
+    public function getConnection(): self
+    {
+
+        return $this;
+    }
+
+    public function setConnection(?Connection $connections): self
+    {
+        $this->connections = $connections;
 
         return $this;
     }

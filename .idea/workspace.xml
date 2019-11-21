@@ -4,7 +4,10 @@
     <list default="true" id="44ca75d0-f690-467f-b8a0-f4efbd9c3962" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/BData.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BData.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Connection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BDatabase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BDatabase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/PeriodType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PeriodType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/StoredProject.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/StoredProject.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,22 +28,10 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Entity/PeriodType.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+                <state relative-caret-position="232">
+                  <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
                   <folding>
                     <element signature="e#30#78#0#PHP" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Entity/Connection.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="304">
-                  <caret line="45" column="19" lean-forward="true" selection-start-line="41" selection-start-column="4" selection-end-line="45" selection-end-column="19" />
-                  <folding>
-                    <element signature="e#30#62#0#PHP" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -49,10 +40,31 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Entity/Project.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="287">
-                  <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+                <state relative-caret-position="68">
+                  <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="48" />
                   <folding>
                     <element signature="e#30#78#0#PHP" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Entity/StoredProject.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="119">
+                  <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Entity/Connection.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="867">
+                  <caret line="51" column="23" lean-forward="true" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+                  <folding>
+                    <element signature="e#30#62#0#PHP" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -62,20 +74,23 @@
       </split-first>
       <split-second>
         <leaf>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Entity/BDatabase.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="151">
-                  <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+                <state relative-caret-position="51">
+                  <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Entity/BData.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="44" column="15" lean-forward="true" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
+                <state relative-caret-position="68">
+                  <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="48" />
+                  <folding>
+                    <element signature="e#30#78#0#PHP" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -89,7 +104,6 @@
       <find>usetname</find>
       <find>startTime</find>
       <find>Product</find>
-      <find>data</find>
       <find>databaseFk</find>
       <find>project</find>
       <find>Database</find>
@@ -101,6 +115,8 @@
       <find>bbdata</find>
       <find>AApp</find>
       <find>bdata_id</find>
+      <find>data</find>
+      <find>collection</find>
     </findStrings>
     <dirStrings>
       <dir>C:\projects\backuper</dir>
@@ -113,14 +129,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/src/Entity/PeriodType.php" />
-        <option value="$PROJECT_DIR$/src/Entity/StoredProject.php" />
         <option value="$PROJECT_DIR$/src/Entity/Database.php" />
         <option value="$PROJECT_DIR$/src/Entity/BConnection.php" />
-        <option value="$PROJECT_DIR$/src/Entity/BDatabase.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Project.php" />
         <option value="$PROJECT_DIR$/src/Entity/Connection.php" />
+        <option value="$PROJECT_DIR$/src/Entity/StoredProject.php" />
         <option value="$PROJECT_DIR$/src/Entity/BData.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Project.php" />
+        <option value="$PROJECT_DIR$/src/Entity/PeriodType.php" />
+        <option value="$PROJECT_DIR$/src/Entity/BDatabase.php" />
       </list>
     </option>
   </component>
@@ -309,18 +325,19 @@
       <updated>1574170014771</updated>
       <workItem from="1574170017729" duration="5611000" />
       <workItem from="1574262213377" duration="3594000" />
-      <workItem from="1574324225792" duration="4161000" />
+      <workItem from="1574324225792" duration="11031000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24771000" />
+    <option name="totallyTimeSpent" value="31641000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984227" visible="true" weight="0.1076759" />
-      <window_info id="Structure" order="1" sideWeight="0.50157726" side_tool="true" weight="0.24070022" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.496112" visible="true" weight="0.17910448" />
+      <window_info id="Structure" order="1" sideWeight="0.503888" side_tool="true" visible="true" weight="0.17910448" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -355,13 +372,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20191119151810.php" />
-    <entry file="file://$PROJECT_DIR$/src/Entity/StoredProject.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-77">
-          <caret line="7" column="62" selection-start-line="7" selection-start-column="62" selection-end-line="7" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20191120110025.php" />
     <entry file="file://$PROJECT_DIR$/src/Entity/BConnection.php" />
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
@@ -395,17 +405,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/BDatabase.php">
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20191121092358.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+        <state relative-caret-position="374">
+          <caret line="35" column="39" lean-forward="true" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/BData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="48" />
+          <folding>
+            <element signature="e#30#78#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/PeriodType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+        <state relative-caret-position="232">
+          <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
           <folding>
             <element signature="e#30#78#0#PHP" expanded="true" />
           </folding>
@@ -414,35 +434,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Connection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="45" column="19" lean-forward="true" selection-start-line="41" selection-start-column="4" selection-end-line="45" selection-end-column="19" />
+        <state relative-caret-position="867">
+          <caret line="51" column="23" lean-forward="true" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
           <folding>
             <element signature="e#30#62#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/BData.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/StoredProject.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="44" column="15" lean-forward="true" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20191121092358.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="35" column="39" lean-forward="true" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+        <state relative-caret-position="119">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Project.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="48" />
           <folding>
             <element signature="e#30#78#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/BDatabase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
         </state>
       </provider>
     </entry>
