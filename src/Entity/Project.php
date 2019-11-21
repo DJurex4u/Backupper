@@ -55,7 +55,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AApp\Entity\BData", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\BData", mappedBy="project")
      */
     private $bData;
 

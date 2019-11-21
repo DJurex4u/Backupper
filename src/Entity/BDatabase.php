@@ -47,20 +47,20 @@ class BDatabase
     private $dbSchema;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project, inversedBy= "bDatabases")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="bDatabases")
      * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
      */
     private $project;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bDatabases")
-     * @ORM\JoinColumn(nullable=false, name="periodType_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=false, name="period_type_id", referencedColumnName="id")
      */
     private $periodType;
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PeriodType\Connection", mappedBy="bDatabase")
+     * @ORM\OneToMany(targetEntity="Connection", mappedBy="bDatabase")
      */
     private $connections;                                  //nema get set
 

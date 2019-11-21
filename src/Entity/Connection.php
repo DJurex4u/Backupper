@@ -40,14 +40,14 @@ class Connection
     private $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\BbData", inversedBy="bData")
-     * @ORM\JoinColumn(nullable=false, name="bData_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\BData", inversedBy="bData")
+     * @ORM\JoinColumn(nullable=false, name="b_data_id", referencedColumnName="id")
      */
     private $bData;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BDatabase", inversedBy="bDatabases")
-     * @ORM\JoinColumn(nullable=false, name="bDatabase_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="BDatabase", inversedBy="connections")
+     * @ORM\JoinColumn(nullable=false, name="b_database_id", referencedColumnName="id")
      */
     private $bDatabase;
 
