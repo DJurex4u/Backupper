@@ -40,7 +40,7 @@ class Connection
     private $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\BData", inversedBy="bData")
+     * @ORM\ManyToOne(targetEntity="App\Entity\BData", inversedBy="connections")
      * @ORM\JoinColumn(nullable=false, name="b_data_id", referencedColumnName="id")
      */
     private $bData;

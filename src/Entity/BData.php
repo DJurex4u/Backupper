@@ -27,16 +27,22 @@ class BData
     private $destinationDirectory;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="bData")
      * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
      */
     private $project;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bData")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="period_type_id", referencedColumnName="id")
      */
     private $periodType;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="bData")
+     * @ORM\JoinColumn(nullable=false, name="connection_id", referencedColumnName="id")
+    */
+    private $connections;
 
     public function getId(): ?int
     {
