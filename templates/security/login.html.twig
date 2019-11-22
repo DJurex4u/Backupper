@@ -6,6 +6,10 @@
  <div>
     <h1>login page!</h1>
 
+     {% if error %}
+         <span>{{ error.messageKey }}</span>
+     {% endif %}
+
     <form action="{{ path('login') }}" method="POST">
         <input type="text" name="_username" value="{{ last_username }}" placeholder="Username/e-mail">
 
