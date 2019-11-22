@@ -27,12 +27,12 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getmail(): ?string
+    public function getemail(): ?string
     {
         return $this->email;
     }
 
-    public function setmail(string $email): self
+    public function setemail(string $email): self
     {
         $this->email = $email;
 
