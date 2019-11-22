@@ -32,12 +32,12 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getemail(): ?string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setemail(string $email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -49,9 +49,14 @@ class User implements UserInterface
         // TODO: Implement getRoles() method.
     }
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    public function setPassword($password): void
+    {
+        $this->password = $password;
     }
 
     public function getSalt()
@@ -59,7 +64,7 @@ class User implements UserInterface
         // TODO: Implement getSalt() method.
     }
 
-    public function getUsername()
+    public function getUsername() //had to implement cause of UserInterface
     {
         return $this->email;
     }
@@ -68,6 +73,8 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+
 
 
 }
