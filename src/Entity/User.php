@@ -74,16 +74,18 @@ class User implements UserInterface
     }
 
 
-
-    public function getRoles()
-    {
-        return array($this->getRole());
-    }
-
-    public function getRole()
+    public function getRole(): ?Role
     {
         return $this->role;
     }
+
+
+    public function getRoles(): array
+    {
+        return array($this->getRole()->getName());
+    }
+
+
 
     public function setRole(?Role $role): ?self
     {

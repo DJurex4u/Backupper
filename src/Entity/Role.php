@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
+ * @method string[] getReachableRoleNames(string[] $roles)
  */
-class Role
+class Role implements RoleHierarchyInterface
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -63,15 +67,30 @@ class Role
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setRoles($this);
+            $user->setRole($this);
         }
 
         return $this;
     }
 
+
     public function removeUser(User $user): self
     {
-        // TODO Buda
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getProject() === $this) {
+                $user->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement @method string[] getReachableRoleNames(string[] $roles)
     }
 
 
