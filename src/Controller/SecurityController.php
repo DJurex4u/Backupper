@@ -22,6 +22,12 @@ class SecurityController extends  Controller{
                                 'error' => $error,
                                 'last_username'=>$lastUsername
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){
 
     }
 }

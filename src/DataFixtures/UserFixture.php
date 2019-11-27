@@ -20,7 +20,10 @@ class UserFixture extends Fixture
     {
         $numOfUsers = 10;
         $myRole = new Role();
-        $myRole->setName("Pleb");
+        $allRoles = array("ROLE_ADMIN", "ROLE_USER");
+        $myRole->setName($allRoles[rand(0,1)]);
+
+
 
         for ($i = 0; $i < $numOfUsers; $i++) {
             $user = new User();

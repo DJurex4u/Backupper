@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
  * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
  * @method string[] getReachableRoleNames(string[] $roles)
  */
-class Role implements RoleHierarchyInterface
+class Role
 {
 
     /**
@@ -88,10 +88,7 @@ class Role implements RoleHierarchyInterface
     }
 
 
-    public function __call($name, $arguments)
-    {
-        // TODO: Implement @method string[] getReachableRoleNames(string[] $roles)
-    }
+
 
 
 }

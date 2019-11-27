@@ -73,19 +73,19 @@ class User implements UserInterface
         $this->credentials = $credentials;
     }
 
-
     public function getRole(): ?Role
     {
         return $this->role;
     }
-
+    public function getRoleAsString(): string
+    {
+        return $this->getRole()->getName();
+    }
 
     public function getRoles(): array
     {
-        return array($this->getRole()->getName());
+        return array($this->getRoleAsString());
     }
-
-
 
     public function setRole(?Role $role): ?self
     {
@@ -98,7 +98,7 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function setPassword($password): void
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
@@ -112,11 +112,14 @@ class User implements UserInterface
     {
         return $this->email;
     }
+    public function setUsername(string $username) //had to implement getUsername cause of UserInterface
+    {
+        $this->setEmail($username);
+    }
 
     public function eraseCredentials()
     {
      $this->setCredentials('');
     }
-
 
 }
