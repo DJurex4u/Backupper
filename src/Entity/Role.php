@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,8 +16,63 @@ class Role
      */
     private $id;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    public function getId(): int
     {
         return $this->id;
     }
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="role")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+
+    public function getUsers(): ArrayCollection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setRoles($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        // TODO Buda
+    }
+
+
 }

@@ -25,7 +25,20 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $credentials;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $password;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false, name="role_id", referencedColumnName="id")
+     */
+    private $role;
+
 
     public function getId(): ?int
     {
@@ -44,9 +57,38 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
+    }
+
+    /**
+     * @param mixed $credentials
+     */
+    public function setCredentials($credentials): void
+    {
+        $this->credentials = $credentials;
+    }
+
+
+
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return array($this->getRole());
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Role $role): ?self
+    {
+        $this->role = $role;
+        return $this;
     }
 
     public function getPassword(): ?string
@@ -71,10 +113,8 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+     $this->setCredentials('');
     }
-
-
 
 
 }
