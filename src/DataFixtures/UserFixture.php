@@ -21,7 +21,7 @@ class UserFixture extends Fixture
         $numOfUsers = 10;
         $myRole = new Role();
         $allRoles = array("ROLE_ADMIN", "ROLE_USER");
-        $myRole->setName($allRoles[rand(0,1)]);
+
 
 
 
@@ -31,6 +31,7 @@ class UserFixture extends Fixture
             $user->setPassword(
                 $this->encoder->encodePassword($user, '1234')
             );
+            $myRole->setName($allRoles[rand(0,1)]);
             $user->setRole($myRole);
             $user->setCredentials("Mr.Dr.Sc.");
 
