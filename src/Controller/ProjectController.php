@@ -4,13 +4,15 @@ namespace App\Controller;
 
 
 use App\Entity\Project;
-use Doctrine\DBAL\Types\IntegerType;
-use Doctrine\DBAL\Types\TextType;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class ProjectController extends AbstractController
 {
@@ -87,7 +89,7 @@ class ProjectController extends AbstractController
 
     /**
      * @Route("project/delete/{id}", name="project_delete")
-     * @Method({"GET"})
+     * @Method({"DELETE"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -97,14 +99,14 @@ class ProjectController extends AbstractController
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($project);
-        //$entityManager->flush();
+        $entityManager->flush();
 
-        return $this->render('project/list.html.twig');
-
+        return $this->redirectToRoute('project_list');
     }
 
     /**
      * @Route("project/create", name="project_create")
+     * @Method({"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -115,6 +117,15 @@ class ProjectController extends AbstractController
             ->add('name', TextType::class)
             ->add('personInCharge', TextType::class)
             ->add('keepAmount', IntegerType::class)
+
+
+            ->add('save', SubmitType::class, [
+                'label' => 'Create',
+                    'attr' => [
+                        'class' => 'btn btn-primary mt-3'
+                            ]
+
+            ])
             ->getForm();
 
         $form->handleRequest($request);
@@ -123,11 +134,10 @@ class ProjectController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
-            return $this->redirectToRoute('project/list.html.twig');
+            return $this->redirectToRoute('project_list');
         }
 
-        return $this->render('project/create.html.twig', ['form' => $form->createView()]);
-
+        return $this->render('project/create.html.twig',['form' => $form->createView()]);
     }
 
 }
