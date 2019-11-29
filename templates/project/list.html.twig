@@ -7,8 +7,8 @@
         <table id="projects" class="table table-striped">
             <thead>
             <tr>
-                <th>Project Title</th>
-                <th>Actions</th>
+                <th>Connections</th>
+                <th>Databases</th>
             </tr>
             </thead>
             <tbody>
@@ -16,8 +16,8 @@
                 <tr>
                     <td>{{ project.name }}</td>
                     <td>
-                        <a href="/article/{{ project.id }}" class="btn btn-dark">Show</a>
-                        <a href="/article/edit/{{ project.id }}" class="btn btn-light">Edit</a>
+                        <a href="/project/read/{{ project.id }}" class="btn btn-dark">Show</a>
+                        <a href="/project/update/{{ project.id }}" class="btn btn-light">Edit</a>
                         <a href="#" class="btn btn-danger delete-article" data-id="{{ project.id }}">Delete</a>
                     </td>
                 </tr>
@@ -25,7 +25,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>No articles to display</p>
+        <p>No projects to display</p>
     {% endif %}
 {% endblock %}
 

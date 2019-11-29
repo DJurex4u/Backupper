@@ -39,8 +39,10 @@ class ProjectController extends AbstractController
     {
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
-        if ($project) {
-            throw new \Exception('Cannot find project with given ID');
+        if (!$project) {
+            throw $this->createNotFoundException(
+                'No project found for id '.$id
+            );
         }
 
         return $this->render('project/read.html.twig', array('project' => $project));
@@ -59,8 +61,8 @@ class ProjectController extends AbstractController
     {
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
-        if ($project) {
-            throw new \Exception('Cannot find project with given ID');
+        if (!$project) {
+            throw new \Exception('Cannot find project for id' .$id);
         }
 
         $form = $this->createFormBuilder($project)
