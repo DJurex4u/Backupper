@@ -71,7 +71,10 @@ class ProjectController extends AbstractController
             ->add('name', TextType::class)
             ->add('personInCharge', TextType::class)
             ->add('keepAmount', IntegerType::class)
-            ->add('save', SubmitType::class, ['label' => 'Save'])
+            ->add('save', SubmitType::class, ['label' => 'Save',
+                'attr' => [
+                    'class' => 'btn btn-primary mt-3'
+                ]])
             ->getForm();
 
         $form->handleRequest($request);

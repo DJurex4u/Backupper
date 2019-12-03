@@ -1,1 +1,12 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Update Project{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <hr>
+    <a href="{{ path('project_list') }}">Go Back</a>
+{% endblock %}
