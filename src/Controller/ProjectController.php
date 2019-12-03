@@ -52,7 +52,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("project/update/{id}", name="project_update")
+     * @Route("/project/update/{id}", name="project_update")
      * Method({"GET", "POST"})
      * @param Request $request
      * @param int $id
@@ -81,18 +81,18 @@ class ProjectController extends AbstractController
             $entityManager->persist($project);
             $entityManager->flush();
 
-            return $this->redirectToRoute('project/list.html.twig');
+            return $this->redirectToRoute('project_list');
         }
 
         return $this->render('project/update.html.twig', ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("project/delete/{id}", name="project_delete")
+     * @Route("/project/delete/{id}", name="project_delete")
      * @Method({"DELETE"})
      * @param Request $request
      * @param int $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, int $id)
     {
@@ -101,11 +101,15 @@ class ProjectController extends AbstractController
         $entityManager->remove($project);
         $entityManager->flush();
 
+
+        $response = new Response();
+        $response->send();     // without this won't refresh after every delete
+
         return $this->redirectToRoute('project_list');
     }
 
     /**
-     * @Route("project/create", name="project_create")
+     * @Route("/project/create", name="project_create")
      * @Method({"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response

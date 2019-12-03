@@ -18,7 +18,7 @@
                     <td>
                         <a href="{{ path('project_read', {id: project.id}) }}" class="btn btn-dark">Show</a>
                         <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Edit</a>
-                        <a href="{{ path('project_delete', {id: project.id}) }}" class="btn btn-danger delete-project" data-id="{{ project.id }}">Delete</a>
+                        <a href="{{ path('project_list') }}" class="btn btn-danger delete-project" data-id="{{ project.id }}">Delete</a>  {# {{ path('project_delete', {id: project.id}) }} #}
                     </td>
                 </tr>
             {% endfor %}
@@ -30,5 +30,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/js/main.js"></script>
+    <script src="/js/deleteFromTable.js"></script>
 {% endblock %}
