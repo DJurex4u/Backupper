@@ -12,10 +12,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 
 
 class ProjectController extends AbstractController
 {
+    const DEFAULT_KEEP_AMOUNT = 3;
+
     /**
      * @Route("/project/list", name="project_list")
      * @Method({"GET"})
@@ -59,13 +63,14 @@ class ProjectController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function updateAction(Request $request,int $id)
+    public function updateAction(Request $request,int $id, ValidatorInterface $validator)
     {
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
         if (!$project) {
             throw new \Exception('Cannot find project for id' .$id);
         }
+
 
         $form = $this->createFormBuilder($project)
             ->add('name', TextType::class)
@@ -77,9 +82,12 @@ class ProjectController extends AbstractController
                 ]])
             ->getForm();
 
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        $form->handleRequest($request);
+        $errors = $validator->validate($project);
+
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)  ){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
@@ -117,13 +125,15 @@ class ProjectController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, ValidatorInterface $validator)
     {
         $project = new Project();
         $form = $this->createFormBuilder($project)
             ->add('name', TextType::class)
             ->add('personInCharge', TextType::class)
-            ->add('keepAmount', IntegerType::class)
+            ->add('keepAmount', IntegerType::class, [
+                'empty_data' => self::DEFAULT_KEEP_AMOUNT
+            ])
 
 
             ->add('save', SubmitType::class, [
@@ -135,9 +145,10 @@ class ProjectController extends AbstractController
             ])
             ->getForm();
 
+        $errors = $validator->validate($project);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0) ){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
@@ -19,23 +20,27 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $personInCharge;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull()
+     * @Assert\GreaterThan(2)
+     *
      */
     private $keepAmount;
 
     //bidirectional CONNECTION
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
      */
     private $connections;
@@ -99,7 +104,7 @@ class Project
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -111,7 +116,7 @@ class Project
         return $this->personInCharge;
     }
 
-    public function setPersonInCharge(string $personInCharge): self
+    public function setPersonInCharge(?string $personInCharge): self
     {
         $this->personInCharge = $personInCharge;
 
