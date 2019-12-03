@@ -5,7 +5,7 @@
 {% block body %}
     <h1>{{ project.name }}</h1>
     <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Edit</a>
-    <a id = "deleteButton" href="{{ path('project_delete', {id: project.id}) }}"  class="btn btn-danger delete-article">Delete</a>
+    <a id = "deleteButton" href="{{ path('project_delete', {id: project.id}) }}"  class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
     <hr>
     <p>Project id: {{ project.id }}</p>
     <p>Person in charge: {{ project.personInCharge }}</p>

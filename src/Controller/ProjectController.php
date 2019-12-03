@@ -102,8 +102,8 @@ class ProjectController extends AbstractController
         $entityManager->flush();
 
 
-        $response = new Response();
-        $response->send();     // without this won't refresh after every delete
+        //$response = new Response();
+        //$response->send();
 
         return $this->redirectToRoute('project_list');
     }
