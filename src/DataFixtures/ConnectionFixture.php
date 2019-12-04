@@ -23,8 +23,8 @@ class ConnectionFixture extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $numOfUsers = 10;
-//        $bData = new BData();
-//        $bDatabase = new BDatabase();
+       // $bData = new BData();
+       // $bDatabase = new BDatabase();
 
 
         for ($i = 0; $i < $numOfUsers; $i++) {
@@ -32,17 +32,19 @@ class ConnectionFixture extends Fixture implements DependentFixtureInterface
             $connection = new Connection();
             $connection->setUsername(substr(md5(mt_rand()), 0, 7));
             $connection->setPassword('1234');
-//            $connection->setBData($bData);
-//            $connection->setBDatabase($bDatabase);
+           // $connection->setBData($bData);
+           // $connection->setBDatabase($bDatabase);
             $port = rand(1, 100);
+            $hostName = rand(1,999) . ':' . rand(1,999) . ':' . rand(1,999) . ':' . rand(1,999);
             $connection->setPort($port);
+            $connection->setDbHostName($hostName);
 
             /** @var Project $project */
             $project = $this->getReference('project_' . $i);
 
             //$manager->persist($bData);
-            //$manager->persist($bDatabase);
-            //$manager->persist($project);
+           // $manager->persist($bDatabase);
+            $manager->persist($project);
 
             $connection->setProject($project);
 

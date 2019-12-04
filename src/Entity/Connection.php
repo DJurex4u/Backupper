@@ -33,6 +33,11 @@ class Connection
     private $port;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $dbHostName;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
      * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
@@ -90,6 +95,22 @@ class Connection
         $this->port = $port;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDbHostName()
+    {
+        return $this->dbHostName;
+    }
+
+    /**
+     * @param mixed $dbHostName
+     */
+    public function setDbHostName($dbHostName): void
+    {
+        $this->dbHostName = $dbHostName;
     }
 
     public function getProject(): ?Project

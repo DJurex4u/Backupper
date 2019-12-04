@@ -5,21 +5,23 @@
 {% block body %}
     <h1>{{ project.name }}</h1>
     <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Update</a>
-    <a id = "deleteButton" href="{{ path('project_delete', {id: project.id}) }}"  class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
+    <a id="deleteButton" href="{{ path('project_delete', {id: project.id}) }}" class="btn btn-danger delete-project"
+       onclick="return confirm('Are you sure?')">Delete</a>
     <hr>
-    <p>Project id:  {{ project.id }}</p>
+    <p>Project id: {{ project.id }}</p>
     <p>Person in charge: {{ project.personInCharge }}</p>
     <p>Keep amount: {{ project.keepAmount }}</p>
 
     <h3>Connections</h3>
     <ul>
         {% for bDatabase in project.bDatabases %}
-            <li>{{ bDatabase.username }}@{{ bDatabase.id }}:{{ bDatabase.port }}</li>
+            <li>{{ bDatabase.username }}@{{ bDatabase.dbHostName }}:{{ bDatabase.port }}</li>
         {% endfor %}
     </ul>
 
     <h3>Databases</h3>
     <table class="table table-striped">
+        {% if project.bDatabases.count > 0 %}
         <thead>
         <tr>
             <th>Host</th>
@@ -30,24 +32,25 @@
         </tr>
         </thead>
         <tbody>
-        {% for bDatabase in project.bDatabases %}
-            <tr>
-                <td>{{ bDatabase.id }}</td>
-                <td>{{ bDatabase.username }}</td>
-                <td>{{ bDatabase.driver }}</td>
-                <td>{{ bDatabase.port }}</td>
-                <td>{{ bDatabase.dbSchema }}</td>
-            </tr>
-        {% endfor %}
+            {% for bDatabase in project.bDatabases %}
+                <tr>
+                    <td>{{ bDatabase.id }}</td>
+                    <td>{{ bDatabase.username }}</td>
+                    <td>{{ bDatabase.driver }}</td>
+                    <td>{{ bDatabase.port }}</td>
+                    <td>{{ bDatabase.dbSchema }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <p>No Databases to display</p>
+        {% endif %}
         </tbody>
     </table>
 
-    //todo CONNECTIONS
-    //todo DATABASES
     //todo DATA
 
     <hr>
     <a href="{{ path('project_list') }}">Go Back</a>
-    {% endblock %}
+{% endblock %}
 
 
