@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Project;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class ProjectFixtures extends Fixture
@@ -12,16 +13,19 @@ class ProjectFixtures extends Fixture
     {
         $numOfUsers = 10;
 
-
         for ($i = 0; $i < $numOfUsers; $i++) {
             $project = new Project();
             $project->setName(substr(md5(mt_rand()), 0, 7));
             $project->setKeepAmount(3);
             $project->setPersonInCharge(substr(md5(mt_rand()), 0, 7));
 
+
             $manager->persist($project);
+            // store for usage later as App\Entity\Project_#COUNT#
+            $this->addReference('project_' . $i, $project);  //reference za ConnectionFixture
         }
 
         $manager->flush();
     }
+
 }

@@ -85,7 +85,7 @@ class Connection
         return $this->port;
     }
 
-    public function setPort(integer $port): self
+    public function setPort(int $port): self
     {
         $this->port = $port;
 
