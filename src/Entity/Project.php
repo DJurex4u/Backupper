@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -46,7 +47,6 @@ class Project
     private $connections;
 
 
-
     //bidirectional BDATABASE
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -64,16 +64,11 @@ class Project
     private $bDatas;
 
     /**
-     *  @var \Doctrine\Common\Collections\ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\StoredProject", mappedBy="project")
      */
     private $storedProjects;
-
-
-
-
-
 
 
     public function __construct()
@@ -83,15 +78,6 @@ class Project
         $this->storedProjects = new ArrayCollection();
         $this->bDatas = new ArrayCollection();
     }
-
-
-
-
-
-
-
-
-
 
 
     public function getId(): ?int
@@ -185,9 +171,9 @@ class Project
     }
 
     /**
-     * @return ArrayCollection
+     * @return PersistentCollection
      */
-    public function getBDatabases(): ArrayCollection
+    public function getBDatabases(): PersistentCollection
     {
         return $this->bDatabases;
     }
@@ -233,7 +219,7 @@ class Project
         return $this;
     }
 
-    public function removeBData (BDatabase $bData): self
+    public function removeBData(BDatabase $bData): self
     {
         if ($this->bDatas->contains($bData)) {
             $this->bDatas->removeElement($bData);
@@ -245,8 +231,6 @@ class Project
 
         return $this;
     }
-
-
 
 
 }
