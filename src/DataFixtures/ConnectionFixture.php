@@ -39,7 +39,10 @@ class ConnectionFixture extends Fixture implements DependentFixtureInterface
 
             /** @var Project $project */
             $project = $this->getReference('project_' . $i);
-//            $manager->persist($project);
+
+            //$manager->persist($bData);
+            //$manager->persist($bDatabase);
+            //$manager->persist($project);
 
             $connection->setProject($project);
 

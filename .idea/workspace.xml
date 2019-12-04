@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44ca75d0-f690-467f-b8a0-f4efbd9c3962" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataFixtures/ConnectionFixture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/ConnectionFixture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/ProjectFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/ProjectFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Connection.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,8 +87,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/DataFixtures/ConnectionFixture.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="247">
-                  <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+                <state relative-caret-position="213">
+                  <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
                   <folding>
                     <element signature="e#36#57#0#PHP" expanded="true" />
                   </folding>
@@ -177,8 +174,8 @@
         <option value="$PROJECT_DIR$/src/Entity/Project.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/ProjectFixtures.php" />
-        <option value="$PROJECT_DIR$/src/DataFixtures/ConnectionFixture.php" />
         <option value="$PROJECT_DIR$/src/Entity/Connection.php" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/ConnectionFixture.php" />
       </list>
     </option>
   </component>
@@ -441,10 +438,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152091000" />
+    <option name="totallyTimeSpent" value="152519000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5537313" visible="true" weight="0.24626866" />
       <window_info id="Structure" order="1" sideWeight="0.44626865" side_tool="true" visible="true" weight="0.24626866" />
@@ -799,22 +797,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataFixtures/ConnectionFixture.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#36#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Connection.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1183">
           <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
           <folding>
             <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/ConnectionFixture.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+          <folding>
+            <element signature="e#36#57#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
