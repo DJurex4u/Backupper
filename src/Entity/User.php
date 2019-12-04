@@ -103,9 +103,9 @@ class User implements UserInterface
         $this->password = $password;
     }
 
-    public function getSalt()
+    public function getSalt() //had to implement cause of UserInterface
     {
-        // TODO: Implement getSalt() method.
+        return null;
     }
 
     public function getUsername() //had to implement cause of UserInterface
