@@ -41,13 +41,13 @@ class Connection
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\BData", inversedBy="connections")
-     * @ORM\JoinColumn(nullable=false, name="b_data_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, name="b_data_id", referencedColumnName="id")
      */
     private $bData;
 
     /**
      * @ORM\ManyToOne(targetEntity="BDatabase", inversedBy="connections")
-     * @ORM\JoinColumn(nullable=false, name="b_database_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, name="b_database_id", referencedColumnName="id")
      */
     private $bDatabase;
 
