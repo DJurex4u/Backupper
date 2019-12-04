@@ -40,8 +40,6 @@ class Project
      */
     private $connections;
 
-
-
     //bidirectional BDATABASE
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -65,12 +63,6 @@ class Project
      */
     private $storedProjects;
 
-
-
-
-
-
-
     public function __construct()
     {
         $this->connections = new ArrayCollection();
@@ -78,16 +70,6 @@ class Project
         $this->storedProjects = new ArrayCollection();
         $this->bDatas = new ArrayCollection();
     }
-
-
-
-
-
-
-
-
-
-
 
     public function getId(): ?int
     {
@@ -240,8 +222,4 @@ class Project
 
         return $this;
     }
-
-
-
-
 }
