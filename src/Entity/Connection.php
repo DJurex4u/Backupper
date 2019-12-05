@@ -85,7 +85,7 @@ class Connection
         return $this;
     }
 
-    public function getPort(): ?integer
+    public function getPort(): ?int
     {
         return $this->port;
     }

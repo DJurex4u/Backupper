@@ -12,19 +12,37 @@
     <p>Person in charge: {{ project.personInCharge }}</p>
     <p>Keep amount: {{ project.keepAmount }}</p>
 
-    <h3>Connections</h3>
-    <ul>
-        {% for bDatabase in project.bDatabases %}
-            <li>{{ bDatabase.username }}@{{ bDatabase.dbHostName }}:{{ bDatabase.port }}</li>
-        {% endfor %}
-    </ul>
 
-    <h3>Databases</h3>
-    <table class="table table-striped">
-        {% if project.bDatabases.count > 0 %}
+    {% if project.connections.count %}
+        <h3>Connections</h3>
+        <table class="table table-striped">
         <thead>
         <tr>
-            <th>Host</th>
+            <th>Username</th>
+            <th>Host Name</th>
+            <th>Port</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for connection in project.connections %}
+            <tr>
+                <td>{{ connection.username }}</td>
+                <td>{{ connection.dbHostName }}</td>
+                <td>{{ connection.port }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No Connections to display</p>
+    {% endif %}
+    </tbody>
+    </table>
+
+    {% if project.bDatabases.count %}
+        <h3>Databases</h3>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
             <th>Username</th>
             <th>Driver</th>
             <th>Port</th>
@@ -32,22 +50,45 @@
         </tr>
         </thead>
         <tbody>
-            {% for bDatabase in project.bDatabases %}
-                <tr>
-                    <td>{{ bDatabase.id }}</td>
-                    <td>{{ bDatabase.username }}</td>
-                    <td>{{ bDatabase.driver }}</td>
-                    <td>{{ bDatabase.port }}</td>
-                    <td>{{ bDatabase.dbSchema }}</td>
-                </tr>
-            {% endfor %}
-        {% else %}
-            <p>No Databases to display</p>
-        {% endif %}
-        </tbody>
+        {% for bDatabase in project.bDatabases %}
+            <tr>
+                <td>{{ bDatabase.serverName }}</td>
+                <td>{{ bDatabase.username }}</td>
+                <td>{{ bDatabase.driver }}</td>
+                <td>{{ bDatabase.port }}</td>
+                <td>{{ bDatabase.dbSchema }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No Databases to display</p>
+    {% endif %}
+    </tbody>
     </table>
 
-    //todo DATA
+
+    {% if project.bDatas.count %}
+        <h3>Data</h3>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Source</th>
+            <th>Destination</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bData in project.bDatas %}
+            <tr>
+                <td>{{ bData.sourceDirectory }}</td>
+                <td>{{ bData.destinationDirectory }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No Data to display</p>
+    {% endif %}
+    </tbody>
+    </table>
+
+
 
     <hr>
     <a href="{{ path('project_list') }}">Go Back</a>

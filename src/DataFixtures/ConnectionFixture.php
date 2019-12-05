@@ -35,7 +35,7 @@ class ConnectionFixture extends Fixture implements DependentFixtureInterface
            // $connection->setBData($bData);
            // $connection->setBDatabase($bDatabase);
             $port = rand(1, 100);
-            $hostName = rand(1,999) . ':' . rand(1,999) . ':' . rand(1,999) . ':' . rand(1,999);
+            $hostName = rand(1,999) . '.' . rand(1,999) . '.' . rand(1,999) . '.' . rand(1,999);
             $connection->setPort($port);
             $connection->setDbHostName($hostName);
 

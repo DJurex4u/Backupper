@@ -19,7 +19,7 @@ class BDatabase
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $severName;
+    private $serverName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -74,14 +74,14 @@ class BDatabase
         return $this->id;
     }
 
-    public function getSeverName(): ?string
+    public function getServerName(): ?string
     {
-        return $this->severName;
+        return $this->serverName;
     }
 
-    public function setSeverName(string $severName): self
+    public function setServerName(string $serverName): self
     {
-        $this->severName = $severName;
+        $this->serverName = $serverName;
 
         return $this;
     }

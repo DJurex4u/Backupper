@@ -153,9 +153,9 @@ class Project
     }
 
     /**
-     * @return ArrayCollection
+     * @return PersistentCollection
      */
-    public function getConnections(): ArrayCollection
+    public function getConnections(): PersistentCollection
     {
         return $this->connections;
     }
@@ -202,9 +202,9 @@ class Project
     }
 
     /**
-     * @return ArrayCollection
+     * @return PersistentCollection
      */
-    public function getBDatas(): ArrayCollection
+    public function getBDatas(): PersistentCollection
     {
         return $this->bDatas;
     }
