@@ -22,7 +22,7 @@
         <a href=" ">New Connection</a>  {# If changing, change the other one below#}
     {% else %}
         <h3>Connections </h3>
-        <a href=" ">New Connection</a>
+        <a href=" ">New Connection</a>  {# this one #}
         <table class="table table-striped">
         <thead>
         <tr>
@@ -41,7 +41,7 @@
                 <td>
                     <a href=" " class="btn btn-dark">Read</a>
                     <a href=" " class="btn btn-light">Update</a>
-                    <a href=" " class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a href=" {{ path('connection_delete', {id: connection.id}) }}" class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>
         {% endfor %}
@@ -58,7 +58,7 @@
         <p></p>
     {% else %}
         <h3>Databases</h3>
-        <a href=" ">New Database</a>
+        <a href=" ">New Database</a>    {# this one #}
         <table class="table table-striped">
         <thead>
         <tr>
@@ -96,7 +96,7 @@
         <p></p>
     {% else %}
         <h3>Data</h3>
-        <a href=" ">New Data</a>
+        <a href=" ">New Data</a>    {# this one #}
         <table class="table table-striped">
         <thead>
         <tr>

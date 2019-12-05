@@ -15,13 +15,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
-
+/**
+ * Class ProjectController
+ * @package App\Controller
+ * @Route("/project")
+ */
 class ProjectController extends AbstractController
 {
     const DEFAULT_KEEP_AMOUNT = 3;
 
     /**
-     * @Route("/project/list", name="project_list")
+     * @Route("/list", name="project_list")
      * @Method({"GET"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -34,7 +38,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/project/read/{id}", name="project_read")
+     * @Route("/read/{id}", name="project_read")
      * @Method({"GET"})
      * @param Request $request
      * @param int $id
@@ -56,7 +60,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/project/update/{id}", name="project_update")
+     * @Route("/update/{id}", name="project_update")
      * Method({"GET", "POST"})
      * @param Request $request
      * @param int $id
@@ -99,7 +103,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/project/delete/{id}", name="project_delete")
+     * @Route("/delete/{id}", name="project_delete")
      * @Method({"DELETE"})
      * @param Request $request
      * @param int $id
@@ -120,7 +124,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/project/create", name="project_create")
+     * @Route("/create", name="project_create")
      * @Method({"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
