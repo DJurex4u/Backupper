@@ -5,22 +5,31 @@
 {% block body %}
     <h1>{{ project.name }}</h1>
     <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Update</a>
-    <a id="deleteButton" href="{{ path('project_delete', {id: project.id}) }}" class="btn btn-danger delete-project"
+    <a href="{{ path('project_delete', {id: project.id}) }}" class="btn btn-danger delete-project"
        onclick="return confirm('Are you sure?')">Delete</a>
     <hr>
     <p>Project id: {{ project.id }}</p>
     <p>Person in charge: {{ project.personInCharge }}</p>
     <p>Keep amount: {{ project.keepAmount }}</p>
 
+    {% set connectionsCount = project.connections.count %}
+    {% set databasesCount = project.bDatabases.count %}
+    {% set datasCount = project.bDatas.count %}
 
-    {% if project.connections.count %}
-        <h3>Connections</h3>
+    {#CONNECTIONS#}
+    {% if not connectionsCount %}
+        <p>No Connections to display</p>
+        <a href=" ">New Connection</a>  {# If changing, change the other one below#}
+    {% else %}
+        <h3>Connections </h3>
+        <a href=" ">New Connection</a>
         <table class="table table-striped">
         <thead>
         <tr>
             <th>Username</th>
             <th>Host Name</th>
             <th>Port</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -29,16 +38,27 @@
                 <td>{{ connection.username }}</td>
                 <td>{{ connection.dbHostName }}</td>
                 <td>{{ connection.port }}</td>
+                <td>
+                    <a href=" " class="btn btn-dark">Read</a>
+                    <a href=" " class="btn btn-light">Update</a>
+                    <a href=" " class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
             </tr>
         {% endfor %}
-    {% else %}
-        <p>No Connections to display</p>
+
+
     {% endif %}
     </tbody>
     </table>
 
-    {% if project.bDatabases.count %}
+    {#DATABASES#}
+    {% if not databasesCount %}
+        <p class="navbar-nav">No Databases to display</p>
+        <a href=" ">New Database</a>    {# If changing, change the other one below#}
+        <p></p>
+    {% else %}
         <h3>Databases</h3>
+        <a href=" ">New Database</a>
         <table class="table table-striped">
         <thead>
         <tr>
@@ -47,6 +67,7 @@
             <th>Driver</th>
             <th>Port</th>
             <th>DB Scheme</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -57,22 +78,31 @@
                 <td>{{ bDatabase.driver }}</td>
                 <td>{{ bDatabase.port }}</td>
                 <td>{{ bDatabase.dbSchema }}</td>
+                <td>
+                    <a href="  " class="btn btn-dark">Read</a>
+                    <a href="  " class="btn btn-light">Update</a>
+                    <a href="  " class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
             </tr>
         {% endfor %}
-    {% else %}
-        <p>No Databases to display</p>
     {% endif %}
     </tbody>
     </table>
 
-
-    {% if project.bDatas.count %}
+    {#DATA#}
+    {% if not datasCount %}
+        <p class="navbar-nav">No Data to display</p>
+        <a href=" ">New Data</a>    {# If changing, change the other one below#}
+        <p></p>
+    {% else %}
         <h3>Data</h3>
+        <a href=" ">New Data</a>
         <table class="table table-striped">
         <thead>
         <tr>
             <th>Source</th>
             <th>Destination</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -80,10 +110,14 @@
             <tr>
                 <td>{{ bData.sourceDirectory }}</td>
                 <td>{{ bData.destinationDirectory }}</td>
+                <td>
+                    <a href="   " class="btn btn-dark">Read</a>
+                    <a href="   " class="btn btn-light">Update</a>
+                    <a href="   " class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
             </tr>
         {% endfor %}
-    {% else %}
-        <p>No Data to display</p>
+
     {% endif %}
     </tbody>
     </table>
