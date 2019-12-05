@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConnectionRepository")
@@ -19,16 +20,19 @@ class Connection
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $password;
 
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\NotNull()
      */
     private $port;
 
@@ -41,6 +45,7 @@ class Connection
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
      * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $project;
 
