@@ -149,10 +149,10 @@ class ProjectController extends AbstractController
             ])
             ->getForm();
 
-        $errors = $validator->validate($project);
+        //$errors = $validator->validate($project);                 // read the comment below...
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0) ){
+        if ($form->isSubmitted() && $form->isValid()){              //"&& (count($errors) == 0" was removed cause it seems to work fine without it, and it DEFINETLY does NOT work with it)
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
