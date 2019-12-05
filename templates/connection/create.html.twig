@@ -1,6 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ connection.dbHostName }}{% endblock %}
+{% block title %}New Connection{% endblock %}
 
 {% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    //TODO: BData, BDatabases (can be NULL)
+    <hr>
+    <a href="javascript:history.back()">Go Back</a>
+
 {% endblock %}

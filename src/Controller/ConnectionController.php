@@ -10,11 +10,16 @@ namespace App\Controller;
 
 
 use App\Entity\Connection;
+use App\Entity\Project;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Project;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Class ConnectionController
@@ -41,7 +46,54 @@ class ConnectionController extends AbstractController
         $entityManager->flush();
 
         return $this->redirect($request->headers->get('referer'));
+    }
 
+    /**
+     * @Route("/create/{id}", name="connection_create")
+     * @Method({"GET","POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function createAction(Request $request, ValidatorInterface $validator, int $id)
+    {
+        $connection = new Connection();
+
+        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
+
+        if (!$project) {
+            throw $this->createNotFoundException(
+                'No project found for id ' . $id
+            );
+        }
+        $connection->setProject($project);
+
+        $form = $this->createFormBuilder($connection)
+            ->add('username', TextType::class)
+            ->add('dbHostName', TextType::class)
+            ->add('port', IntegerType::class)
+            ->add('password', PasswordType::class)   // Password is stored in plain text !!
+
+
+            ->add('save', SubmitType::class, [
+                'label' => 'Create',
+                'attr' => [
+                    'class' => 'btn btn-primary mt-3'
+                ]
+
+            ])
+            ->getForm();
+
+        $errors = $validator->validate($connection);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($connection);
+            $entityManager->flush();
+            return $this->redirect($request->headers->get('referer'));
+        }
+
+        return $this->render('project/create.html.twig', ['form' => $form->createView()]);
     }
 
 }
