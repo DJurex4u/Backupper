@@ -85,10 +85,11 @@ class ConnectionController extends AbstractController
             ])
             ->getForm();
 
-        //$errors = $validator->validate($connection);                // read the comment below...
         $form->handleRequest($request);
+        $errors = $validator->validate($connection);
 
-        if ($form->isSubmitted() && $form->isValid() ) {             //"&& (count($errors) == 0" was removed cause it seems to work fine without it, and it DEFINITELY does NOT work with it)
+
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
