@@ -56,7 +56,6 @@ class ProjectController extends AbstractController
         }
 
         return $this->render('project/read.html.twig', array('project' => $project));
-
     }
 
     /**
@@ -149,10 +148,13 @@ class ProjectController extends AbstractController
             ])
             ->getForm();
 
-        //$errors = $validator->validate($project);                 // read the comment below...
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){              //"&& (count($errors) == 0" was removed cause it seems to work fine without it, and it DEFINETLY does NOT work with it)
+        $form->handleRequest($request);
+        $errors = $validator->validate($project);
+
+
+
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();

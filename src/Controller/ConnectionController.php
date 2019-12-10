@@ -66,6 +66,7 @@ class ConnectionController extends AbstractController
                 'No project found for id ' . $id
             );
         }
+
         $connection->setProject($project);
 
         $form = $this->createFormBuilder($connection)
@@ -84,17 +85,61 @@ class ConnectionController extends AbstractController
             ])
             ->getForm();
 
-        $errors = $validator->validate($connection);                // read the comment below...
+        //$errors = $validator->validate($connection);                // read the comment below...
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() ) {             //"&& (count($errors) == 0" was removed cause it seems to work fine without it, and it DEFINETLY does NOT work with it)
+        if ($form->isSubmitted() && $form->isValid() ) {             //"&& (count($errors) == 0" was removed cause it seems to work fine without it, and it DEFINITELY does NOT work with it)
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
             return $this->redirect($request->headers->get('referer'));
         }
 
-        return $this->render('project/create.html.twig', ['form' => $form->createView()]);
+        return $this->render('connection/create.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/update/{id}", name="connection_update")
+     * @Method({"GET","POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function updateAction(Request $request, int $id, ValidatorInterface $validator){
+        $connection = $this->getDoctrine()->getRepository(Connection::class)->find($id);
+
+        if(!$connection){
+            throw new \Exception('Cannon find connection for id' .$id);
+        }
+
+        $form = $this->createFormBuilder($connection)
+            ->add('username', TextType::class)
+            ->add('dbHostName', TextType::class)
+            ->add('port', IntegerType::class)
+            ->add('password', PasswordType::class)   // Password is stored in plain text !!
+
+
+            ->add('save', SubmitType::class, [
+                'label' => 'Save',
+                'attr' => [
+                    'class' => 'btn btn-primary mt-3'
+                ]
+
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+        $errors = $validator->validate($connection);
+
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($connection);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('project_list');
+        }
+
+        return $this->render('connection/update.html.twig', ['form' => $form->createView()]);
     }
 
 }

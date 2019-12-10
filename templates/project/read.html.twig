@@ -39,7 +39,7 @@
                 <td>{{ connection.dbHostName }}</td>
                 <td>{{ connection.port }}</td>
                 <td>
-                    <a href=" " class="btn btn-light">Update</a>
+                    <a href=" {{ path('connection_update', {id: connection.id}) }} " class="btn btn-light">Update</a>
                     <a href=" {{ path('connection_delete', {id: connection.id}) }}"
                        class="btn btn-danger delete-project"
                        onclick="return confirm('Are you sure?')">Delete</a>
