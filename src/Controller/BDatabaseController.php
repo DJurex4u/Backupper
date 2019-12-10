@@ -59,7 +59,7 @@ class BDatabaseController extends AbstractController
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request/*, ValidatorInterface $validation*/, int $id)
+    public function createAction(Request $request, ValidatorInterface $validator, int $id)
     {
         $bDatabase = new BDatabase();
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
@@ -90,9 +90,9 @@ class BDatabaseController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
-        //$errors = $validator->validate($connection);
+        $errors = $validator->validate($bDatabase);
 
-        if ($form->isSubmitted() && $form->isValid() /*&& (count($errors) == 0)*/) {
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bDatabase);
             $entityManager->flush();

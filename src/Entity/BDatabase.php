@@ -3,6 +3,7 @@
 namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DatabaseRepository")
@@ -18,37 +19,44 @@ class BDatabase
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $serverName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $userName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $driver;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $port;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $dbSchema;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="bDatabases")
      * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $project;
 
@@ -56,6 +64,7 @@ class BDatabase
      * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bDatabases")
      * @ORM\JoinColumn(nullable=true, name="period_type_id", referencedColumnName="id")
      */
+    //TODO: @Assert\NotNull()
     private $periodType;
 
     /**
