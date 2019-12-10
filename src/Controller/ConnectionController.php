@@ -29,7 +29,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ConnectionController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="bConnection_delete", methods={"GET", "DELETE"})
+     * @Route("/delete/{id}", name="connection_delete", methods={"GET", "DELETE"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -54,7 +54,7 @@ class ConnectionController extends AbstractController
     }
 
     /**
-     * @Route("/create/{id}", name="bConnection_create", methods={"GET","POST"})
+     * @Route("/create/{id}", name="connection_create", methods={"GET","POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -104,7 +104,7 @@ class ConnectionController extends AbstractController
     }
 
     /**
-     * @Route("/update/{id}", name="bConnection_update", methods={"GET","POST"})
+     * @Route("/update/{id}", name="connection_update", methods={"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception

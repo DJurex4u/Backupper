@@ -21,7 +21,7 @@
     {% if not connectionsCount %}
         <p>No Connections to display</p>
     {% endif %}
-    <a href=" {{ path('bConnection_create', {id: project.id}) }} " class="btn btn-primary">New Connection</a>
+    <a href=" {{ path('connection_create', {id: project.id}) }} " class="btn btn-primary">New Connection</a>
     {% if connectionsCount %}
         <table class="table table-striped">
         <thead>
@@ -39,8 +39,8 @@
                 <td>{{ connection.dbHostName }}</td>
                 <td>{{ connection.port }}</td>
                 <td>
-                    <a href=" {{ path('bConnection_update', {id: connection.id}) }} " class="btn btn-light">Update</a>
-                    <a href=" {{ path('bConnection_delete', {id: connection.id}) }}"
+                    <a href=" {{ path('connection_update', {id: connection.id}) }} " class="btn btn-light">Update</a>
+                    <a href=" {{ path('connection_delete', {id: connection.id}) }}"
                        class="btn btn-danger delete-project"
                        onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
