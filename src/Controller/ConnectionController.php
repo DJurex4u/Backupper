@@ -47,23 +47,23 @@ class ConnectionController extends AbstractController
             );
         }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($connection);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($connection);
+        $entityManager->flush();
 
-            return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
      * @Route("/create/{id}", name="connection_create")
      * @Method({"GET","POST"})
      * @param Request $request
+     * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request, ValidatorInterface $validator, int $id)
     {
         $connection = new Connection();
-
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
         if (!$project) {
@@ -78,7 +78,7 @@ class ConnectionController extends AbstractController
             ->add('username', TextType::class)
             ->add('dbHostName', TextType::class)
             ->add('port', IntegerType::class)
-            ->add('password', PasswordType::class)   // Password is stored in plain text !!
+            ->add('password', PasswordType::class)// Password is stored in plain text !!
 
 
             ->add('save', SubmitType::class, [
@@ -111,18 +111,19 @@ class ConnectionController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function updateAction(Request $request, int $id, ValidatorInterface $validator){
+    public function updateAction(Request $request, int $id, ValidatorInterface $validator)
+    {
         $connection = $this->getDoctrine()->getRepository(Connection::class)->find($id);
 
-        if(!$connection){
-            throw new \Exception('Cannon find connection for id' .$id);
+        if (!$connection) {
+            throw new \Exception('Cannon find connection for id' . $id);
         }
 
         $form = $this->createFormBuilder($connection)
             ->add('username', TextType::class)
             ->add('dbHostName', TextType::class)
             ->add('port', IntegerType::class)
-            ->add('password', PasswordType::class)   // Password is stored in plain text !!
+            ->add('password', PasswordType::class)// Password is stored in plain text !!
 
 
             ->add('save', SubmitType::class, [
@@ -137,7 +138,7 @@ class ConnectionController extends AbstractController
         $form->handleRequest($request);
         $errors = $validator->validate($connection);
 
-        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)){
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();

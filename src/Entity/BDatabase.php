@@ -54,7 +54,7 @@ class BDatabase
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bDatabases")
-     * @ORM\JoinColumn(nullable=false, name="period_type_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, name="period_type_id", referencedColumnName="id")
      */
     private $periodType;
 
