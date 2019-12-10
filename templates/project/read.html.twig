@@ -96,7 +96,7 @@
     {% if not datasCount %}
         <p>No Connections to display</p>
     {% endif %}
-    <a href=" " class="btn btn-primary">New Data</a>
+    <a href=" {{ path('bData_create', {id: project.id}) }} " class="btn btn-primary">New Data</a>
     {% if datasCount %}
         <table class="table table-striped">
         <thead>
@@ -112,7 +112,7 @@
                 <td>{{ bData.sourceDirectory }}</td>
                 <td>{{ bData.destinationDirectory }}</td>
                 <td>
-                    <a href="   " class="btn btn-light">Update</a>
+                    <a href=" {{ path('bData_update', {id: bData.id}) }}  " class="btn btn-light">Update</a>
                     <a href=" {{ path('bData_delete', {id: bData.id}) }} " class="btn btn-danger delete-project"
                        onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
