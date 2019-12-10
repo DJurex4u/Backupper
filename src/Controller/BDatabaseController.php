@@ -78,7 +78,6 @@ class BDatabaseController extends AbstractController
             ->add('driver', TextType::class)
             ->add('port', IntegerType::class)
             ->add('dbSchema', TextType::class)
-
             //TODO: periodType = NULL
 
             ->add('save', SubmitType::class, [
@@ -103,7 +102,48 @@ class BDatabaseController extends AbstractController
 
     }
 
+    /**
+     * @Route("/update/{id}", name="bDatabase_update")
+     * @Method({"GET","POST"})
+     *
+     */
+    public function updateAction(Request $request, int $id, ValidatorInterface $validator)
+    {
+        $bDatabase = $this->getDoctrine()->getRepository(BDatabase::class)->find($id);
 
+        if(!$bDatabase){
+            throw new \Exception('Cannon find database for id' .$id);
+        }
 
+        $form = $this->createFormBuilder($bDatabase)
+            ->add('serverName', TextType::class)
+            ->add('userName', TextType::class)
+            ->add('password', PasswordType::class)
+            ->add('driver', TextType::class)
+            ->add('port', IntegerType::class)
+            ->add('dbSchema', TextType::class)
+            //TODO: periodType = NULL
+
+            ->add('save', SubmitType::class, [
+                'label' => 'Save',
+                'attr' => [
+                    'class' => 'btn btn-primary mt-3'
+                ]
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+        $errors = $validator->validate($bDatabase);
+
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($bDatabase);
+            $entityManager->flush();
+            return $this->redirect($request->headers->get('referer'));
+        }
+
+        return $this->render('bDatabase/update.html.twig', ['form' => $form->createView()]);
+
+    }
 
 }

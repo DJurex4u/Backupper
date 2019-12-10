@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44ca75d0-f690-467f-b8a0-f4efbd9c3962" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/bDatabase/update.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BDatabaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BDatabaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BDatabase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BDatabase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Connection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bDatabase/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bDatabase/create.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project/read.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,13 +32,12 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Controller/ProjectController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="469">
-                  <caret line="163" column="89" selection-start-line="163" selection-start-column="89" selection-end-line="163" selection-end-column="89" />
+                <state relative-caret-position="-2163">
+                  <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
                   <folding>
-                    <element signature="e#35#58#0#PHP" expanded="true" />
                     <element signature="e#3097#3111#1#PHP" expanded="true" />
                     <element signature="e#3154#3180#0#PHP" expanded="true" />
                     <element signature="e#5371#5397#0#PHP" expanded="true" />
@@ -60,11 +58,14 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Controller/ConnectionController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-378">
-                  <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+                <state relative-caret-position="-4">
+                  <caret line="118" column="34" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="34" />
+                  <folding>
+                    <element signature="e#125#151#0#PHP" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -73,7 +74,7 @@
             <entry file="file://$PROJECT_DIR$/src/Entity/BDatabase.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="340">
-                  <caret line="59" column="7" lean-forward="true" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+                  <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
                   <folding>
                     <element signature="e#29#77#0#PHP" expanded="true" />
                   </folding>
@@ -101,7 +102,7 @@
             <entry file="file://$PROJECT_DIR$/src/Entity/Connection.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="51">
-                  <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="24" />
+                  <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="24" />
                   <folding>
                     <element signature="e#30#62#0#PHP" expanded="true" />
                   </folding>
@@ -124,11 +125,12 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Controller/BDatabaseController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="248">
-                  <caret line="92" column="51" selection-start-line="92" selection-start-column="51" selection-end-line="92" selection-end-column="51" />
+                <state relative-caret-position="180">
+                  <caret line="127" column="32" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
                   <folding>
                     <element signature="e#125#148#0#PHP" expanded="true" />
                     <element signature="e#3291#3319#0#PHP" expanded="true" />
+                    <element signature="e#4803#4831#0#PHP" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -137,8 +139,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/bDatabase/create.html.twig">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="12" column="78" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
+                <state relative-caret-position="255">
+                  <caret line="15" column="14" selection-end-line="15" selection-end-column="14" />
                 </state>
               </provider>
             </entry>
@@ -146,11 +148,12 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/project/read.html.twig">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-476">
-                  <caret line="59" column="53" selection-start-line="59" selection-start-column="53" selection-end-line="59" selection-end-column="53" />
+                <state relative-caret-position="340">
+                  <caret line="83" column="55" selection-start-line="83" selection-start-column="55" selection-end-line="83" selection-end-column="55" />
                   <folding>
                     <element signature="e#1497#1514#0#Twig" expanded="true" />
                     <element signature="e#2051#2067#0#Twig" expanded="true" />
+                    <element signature="e#2826#2842#0#Twig" expanded="true" />
                     <element signature="e#2843#2859#0#Twig" expanded="true" />
                   </folding>
                 </state>
@@ -242,10 +245,11 @@
         <option value="$PROJECT_DIR$/templates/connection/create.html.twig" />
         <option value="$PROJECT_DIR$/templates/connection/update.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/ConnectionController.php" />
-        <option value="$PROJECT_DIR$/templates/project/read.html.twig" />
         <option value="$PROJECT_DIR$/templates/bDatabase/create.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Connection.php" />
         <option value="$PROJECT_DIR$/src/Entity/BDatabase.php" />
+        <option value="$PROJECT_DIR$/templates/bDatabase/update.html.twig" />
+        <option value="$PROJECT_DIR$/templates/project/read.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/BDatabaseController.php" />
       </list>
     </option>
@@ -518,18 +522,18 @@
       <workItem from="1575365254448" duration="18185000" />
       <workItem from="1575448127425" duration="232000" />
       <workItem from="1575534022161" duration="18549000" />
-      <workItem from="1575967112218" duration="11862000" />
+      <workItem from="1575967112218" duration="13244000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191966000" />
+    <option name="totallyTimeSpent" value="193348000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5492537" visible="true" weight="0.15511727" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5492537" visible="true" weight="0.15511727" />
       <window_info id="Structure" order="1" sideWeight="0.45074627" side_tool="true" visible="true" weight="0.15511727" />
       <window_info id="Favorites" order="2" sideWeight="0.44701988" side_tool="true" weight="0.24626866" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -542,7 +546,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.8773307" visible="true" weight="0.2818864" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.8773307" visible="true" weight="0.2818864" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -564,13 +568,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/PeriodType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2142">
@@ -795,13 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Project.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/project/update.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -826,6 +816,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connection/create.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/BDatabase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+          <folding>
+            <element signature="e#29#77#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Project.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Connection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="24" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/project/list.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -836,38 +860,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connection/create.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/bDatabase/update.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/project/read.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-476">
-          <caret line="59" column="53" selection-start-line="59" selection-start-column="53" selection-end-line="59" selection-end-column="53" />
-          <folding>
-            <element signature="e#1497#1514#0#Twig" expanded="true" />
-            <element signature="e#2051#2067#0#Twig" expanded="true" />
-            <element signature="e#2843#2859#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bDatabase/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="78" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ProjectController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="163" column="89" selection-start-line="163" selection-start-column="89" selection-end-line="163" selection-end-column="89" />
+        <state relative-caret-position="-2163">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
-            <element signature="e#35#58#0#PHP" expanded="true" />
             <element signature="e#3097#3111#1#PHP" expanded="true" />
             <element signature="e#3154#3180#0#PHP" expanded="true" />
             <element signature="e#5371#5397#0#PHP" expanded="true" />
@@ -875,23 +879,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Connection.php">
+    <entry file="file://$PROJECT_DIR$/templates/project/read.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="24" />
+        <state relative-caret-position="340">
+          <caret line="83" column="55" selection-start-line="83" selection-start-column="55" selection-end-line="83" selection-end-column="55" />
           <folding>
-            <element signature="e#30#62#0#PHP" expanded="true" />
+            <element signature="e#1497#1514#0#Twig" expanded="true" />
+            <element signature="e#2051#2067#0#Twig" expanded="true" />
+            <element signature="e#2826#2842#0#Twig" expanded="true" />
+            <element signature="e#2843#2859#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/BDatabase.php">
+    <entry file="file://$PROJECT_DIR$/templates/bDatabase/create.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="59" column="7" lean-forward="true" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
-          <folding>
-            <element signature="e#29#77#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="15" column="14" selection-end-line="15" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -907,11 +911,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/BDatabaseController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="92" column="51" selection-start-line="92" selection-start-column="51" selection-end-line="92" selection-end-column="51" />
+        <state relative-caret-position="180">
+          <caret line="127" column="32" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
           <folding>
             <element signature="e#125#148#0#PHP" expanded="true" />
             <element signature="e#3291#3319#0#PHP" expanded="true" />
+            <element signature="e#4803#4831#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
