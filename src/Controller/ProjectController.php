@@ -7,7 +7,6 @@ use App\Entity\Project;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,8 +24,7 @@ class ProjectController extends AbstractController
     const DEFAULT_KEEP_AMOUNT = 3;
 
     /**
-     * @Route("/list", name="project_list")
-     * @Method({"GET"})
+     * @Route("/list", name="project_list", methods={"GET"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -38,8 +36,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/read/{id}", name="project_read")
-     * @Method({"GET"})
+     * @Route("/read/{id}", name="project_read", methods={"GET"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -59,8 +56,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/update/{id}", name="project_update")
-     * Method({"GET", "POST"})
+     * @Route("/update/{id}", name="project_update", methods={"GET","POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -103,8 +99,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="project_delete")
-     * @Method({"DELETE"})
+     * @Route("/delete/{id}", name="project_delete", methods={"GET", "DELETE"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -115,17 +110,15 @@ class ProjectController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($project);
         $entityManager->flush();
-
+        $this->addFlash('success','Action successfully completed!');
 
         //$response = new Response();
         //$response->send();
-
         return $this->redirectToRoute('project_list');
     }
 
     /**
-     * @Route("/create", name="project_create")
-     * @Method({"GET","POST"})
+     * @Route("/create", name="project_create", methods={"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -145,7 +138,6 @@ class ProjectController extends AbstractController
                     'attr' => [
                         'class' => 'btn btn-primary mt-3'
                             ]
-
             ])
             ->getForm();
 

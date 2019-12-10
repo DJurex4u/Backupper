@@ -11,7 +11,6 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\BDatabase;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,8 +28,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class BDatabaseController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="bDatabase_delete")
-     * @Method({"DELETE"})
+     * @Route("/delete/{id}", name="bDatabase_delete", methods={"GET","DELETE"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -54,8 +52,7 @@ class BDatabaseController extends AbstractController
 
 
     /**
-     * @Route("/create/{id}", name="bDatabase_create")
-     * @Method({"GET","POST"})
+     * @Route("/create/{id}", name="bDatabase_create", methods={"GET","POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -106,8 +103,7 @@ class BDatabaseController extends AbstractController
     }
 
     /**
-     * @Route("/update/{id}", name="bDatabase_update")
-     * @Method({"GET","POST"})
+     * @Route("/update/{id}", name="bDatabase_update", methods={"GET","POST"})
      *
      */
     public function updateAction(Request $request, int $id, ValidatorInterface $validator)

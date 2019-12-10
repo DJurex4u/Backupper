@@ -11,7 +11,6 @@ namespace App\Controller;
 
 use App\Entity\Connection;
 use App\Entity\Project;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,8 +29,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ConnectionController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="connection_delete")
-     * @Method({"DELETE"})
+     * @Route("/delete/{id}", name="bConnection_delete", methods={"GET", "DELETE"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -50,14 +48,13 @@ class ConnectionController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($connection);
         $entityManager->flush();
-        $this->addFlash('success','Action successfully completed!');
+        $this->addFlash('success', 'Action successfully completed!');
 
         return $this->redirect($request->headers->get('referer'));
     }
 
     /**
-     * @Route("/create/{id}", name="connection_create")
-     * @Method({"GET","POST"})
+     * @Route("/create/{id}", name="bConnection_create", methods={"GET","POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -87,7 +84,6 @@ class ConnectionController extends AbstractController
                 'attr' => [
                     'class' => 'btn btn-primary mt-3'
                 ]
-
             ])
             ->getForm();
 
@@ -99,7 +95,7 @@ class ConnectionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
-            $this->addFlash('success','Action successfully completed!');
+            $this->addFlash('success', 'Action successfully completed!');
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -108,8 +104,7 @@ class ConnectionController extends AbstractController
     }
 
     /**
-     * @Route("/update/{id}", name="connection_update")
-     * @Method({"GET","POST"})
+     * @Route("/update/{id}", name="bConnection_update", methods={"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
@@ -134,7 +129,6 @@ class ConnectionController extends AbstractController
                 'attr' => [
                     'class' => 'btn btn-primary mt-3'
                 ]
-
             ])
             ->getForm();
 
@@ -145,7 +139,7 @@ class ConnectionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
-            $this->addFlash('success','Action successfully completed!');
+            $this->addFlash('success', 'Action successfully completed!');
 
             return $this->redirectToRoute('project_list');
         }
