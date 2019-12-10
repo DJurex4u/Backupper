@@ -17,7 +17,7 @@
     {% set datasCount = project.bDatas.count %}
 
     {#CONNECTIONS#}
-    <h3>Connections </h3>
+    <h3> Connections </h3>
     {% if not connectionsCount %}
         <p>No Connections to display</p>
     {% endif %}
@@ -53,13 +53,14 @@
     </table>
 
     {#DATABASES#}
+    <h3>Databases</h3>
     {% if not databasesCount %}
-        <p class="navbar-nav">No Databases to display</p>
-        <a href=" ">New Database</a>    {# If changing, change the other one below#}
-        <p></p>
-    {% else %}
-        <h3>Databases</h3>
-        <a href=" ">New Database</a>    {# this one #}
+        <P>No Databases to display</p>
+    {% endif %}
+<a href=" " class="btn btn-primary">New Database</a>
+
+    {% if databasesCount %}
+
         <table class="table table-striped">
         <thead>
         <tr>
@@ -81,7 +82,7 @@
                 <td>{{ bDatabase.dbSchema }}</td>
                 <td>
                     <a href="  " class="btn btn-light">Update</a>
-                    <a href="  " class="btn btn-danger delete-project"
+                    <a href=" {{ path('bDatabase_delete', {id: bDatabase.id}) }} " class="btn btn-danger delete-project"
                        onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>

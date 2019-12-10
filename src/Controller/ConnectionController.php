@@ -37,16 +37,21 @@ class ConnectionController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function readAction(Request $request, int $id)
+    public function deleteAction(Request $request, int $id)
     {
         $connection = $this->getDoctrine()->getRepository(Connection::class)->find($id);
 
+        if (!$connection) {
+            throw $this->createNotFoundException(
+                'No connection found for id ' . $id
+            );
+        }
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($connection);
-        $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($connection);
+            $entityManager->flush();
 
-        return $this->redirect($request->headers->get('referer'));
+            return $this->redirect($request->headers->get('referer'));
     }
 
     /**
