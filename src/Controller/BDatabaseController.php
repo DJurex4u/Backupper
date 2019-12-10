@@ -47,6 +47,7 @@ class BDatabaseController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($bDatabase);
         $entityManager->flush();
+        $this->addFlash('success','Action successfully completed!');
 
         return $this->redirect($request->headers->get('referer'));
     }
@@ -95,6 +96,8 @@ class BDatabaseController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bDatabase);
             $entityManager->flush();
+            $this->addFlash('success','Action successfully completed!');
+
             return $this->redirect($request->headers->get('referer'));
         }
 
@@ -139,6 +142,8 @@ class BDatabaseController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bDatabase);
             $entityManager->flush();
+            $this->addFlash('success','Action successfully completed!');
+
             return $this->redirect($request->headers->get('referer'));
         }
 

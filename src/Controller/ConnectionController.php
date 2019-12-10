@@ -50,6 +50,7 @@ class ConnectionController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($connection);
         $entityManager->flush();
+        $this->addFlash('success','Action successfully completed!');
 
         return $this->redirect($request->headers->get('referer'));
     }
@@ -98,6 +99,8 @@ class ConnectionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
+            $this->addFlash('success','Action successfully completed!');
+
             return $this->redirect($request->headers->get('referer'));
         }
 
@@ -142,6 +145,7 @@ class ConnectionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
+            $this->addFlash('success','Action successfully completed!');
 
             return $this->redirectToRoute('project_list');
         }

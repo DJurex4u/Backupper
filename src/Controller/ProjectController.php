@@ -94,6 +94,7 @@ class ProjectController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
+            $this->addFlash('success','Action successfully completed!');
 
             return $this->redirectToRoute('project_list');
         }
@@ -158,6 +159,7 @@ class ProjectController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
+            $this->addFlash('success','Action successfully completed!');
             return $this->redirectToRoute('project_list');
         }
 
