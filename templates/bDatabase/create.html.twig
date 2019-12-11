@@ -3,14 +3,14 @@
 {% block title %}New Database{% endblock %}
 
 {% block body %}
+    <a href="{{ path('project_read', {id: projectId}) }}" class="btn btn-primary"  role="button">Go Back</a>
+    <hr>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
 
 //TODO: periodType iS NULL
-    <hr>
-   <a href="javascript:history.back()">Go Back TODO: Needs better solution</a>
 
 
 {% endblock %}

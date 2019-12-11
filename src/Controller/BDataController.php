@@ -3,16 +3,13 @@
  * Created by PhpStorm.
  * User: UHP Digital
  * Date: 12/10/2019
- * Time: 11:22 AM
+ * Time: 3:34 PM
  */
 
 namespace App\Controller;
 
+use App\Entity\BData;
 use App\Entity\Project;
-use App\Entity\BDatabase;
-
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,47 +17,43 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/**
- * Class BDatabaseController
- * @package App\Controller
- * @Route("/database")
- */
-class BDatabaseController extends AbstractController
+class BDataController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="bDatabase_delete", methods={"GET","DELETE"})
+     * @Route("/delete/{id}", name="bData_delete", methods={"GET", "DELETE"})
      * @param Request $request
      * @param int $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function deleteAction(Request $request, int $id)
     {
-        $bDatabase = $this->getDoctrine()->getRepository(BDatabase::class)->find($id);
+        $data = $this->getDoctrine()->getRepository(BData::class)->find($id);
 
-        if (!$bDatabase) {
+        if (!$data) {
             throw $this->createNotFoundException(
-                'No database found for id ' . $id
+                'No connection found for id ' . $id
             );
         }
+
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($bDatabase);
+        $entityManager->remove($data);
         $entityManager->flush();
         $this->addFlash('success', 'Action successfully completed!');
 
         return $this->redirect($request->headers->get('referer'));
     }
 
-
     /**
-     * @Route("/create/{id}", name="bDatabase_create", methods={"GET","POST"})
+     * @Route("/create/{id}", name="bData_create", methods={"GET","POST"})
      * @param Request $request
-     * @param ValidatorInterface $validator
      * @param int $id
+     * @param ValidatorInterface $validator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request, ValidatorInterface $validator, int $id)
+    public function createAction(Request $request, int $id, ValidatorInterface $validator)
     {
-        $bDatabase = new BDatabase();
+        $bData = new BData();
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
         if (!$project) {
@@ -68,17 +61,11 @@ class BDatabaseController extends AbstractController
                 'No project found for id ' . $id
             );
         }
-        $bDatabase->setProject($project);
+        $bData->setProject($project);
 
-        $form = $this->createFormBuilder($bDatabase)
-            ->add('serverName', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('userName', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('driver', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('dbSchema', TextType::class, ['attr' => ['class' => 'ml-4']])
-            //TODO: periodType = NULL
-
+        $form = $this->createFormBuilder($bData)
+            ->add('sourceDirectory', TextType::class)
+            ->add('destinationDirectory', TextType::class)
             ->add('save', SubmitType::class, [
                 'label' => 'Create',
                 'attr' => [
@@ -88,23 +75,23 @@ class BDatabaseController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
-        $errors = $validator->validate($bDatabase);
+        $errors = $validator->validate($bData);
 
         if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($bDatabase);
+            $entityManager->persist($bData);
             $entityManager->flush();
             $this->addFlash('success', 'Action successfully completed!');
 
             return $this->redirectToRoute('project_read', ['id' => $project->getId()]);
         }
 
-        return $this->render('bDatabase/create.html.twig', ['form' => $form->createView(), 'projectId' => $id]);
+        return $this->render('bData/create.html.twig', ['form' => $form->createView(), 'projectId' => $id]);
 
     }
 
     /**
-     * @Route("/update/{id}", name="bDatabase_update", methods={"GET","POST"})
+     * @Route("/update/{id}", name="bData_update", methods={"GET","POST"})
      * @param Request $request
      * @param int $id
      * @param ValidatorInterface $validator
@@ -113,23 +100,16 @@ class BDatabaseController extends AbstractController
      */
     public function updateAction(Request $request, int $id, ValidatorInterface $validator)
     {
-        $bDatabase = $this->getDoctrine()->getRepository(BDatabase::class)->find($id);
-        /** @var int $projectId */
-        $projectId = $bDatabase->getProject()->getId();
+        $bData = $this->getDoctrine()->getRepository(BData::class)->find($id);
+        $projectId = $bData->getProject()->getId();
 
-        if (!$bDatabase) {
-            throw new \Exception('Cannon find database for id' . $id);
+        if (!$bData) {
+            throw new \Exception('Cannon find data for id' . $id);
         }
 
-        $form = $this->createFormBuilder($bDatabase)
-            ->add('serverName', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('userName', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('driver', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('dbSchema', TextType::class, ['attr' => ['class' => 'ml-4']])
-            //TODO: periodType = NULL
-
+        $form = $this->createFormBuilder($bData)
+            ->add('sourceDirectory', TextType::class)
+            ->add('destinationDirectory', TextType::class)
             ->add('save', SubmitType::class, [
                 'label' => 'Save',
                 'attr' => [
@@ -139,19 +119,20 @@ class BDatabaseController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
-        $errors = $validator->validate($bDatabase);
+        $errors = $validator->validate($bData);
 
         if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($bDatabase);
+            $entityManager->persist($bData);
             $entityManager->flush();
             $this->addFlash('success', 'Action successfully completed!');
 
             return $this->redirectToRoute('project_read', ['id' => $projectId]);
         }
 
-        return $this->render('bDatabase/update.html.twig', ['form' => $form->createView(), 'projectId' => $projectId]);
+        return $this->render('bData/update.html.twig', ['form' => $form->createView(), 'projectId' => $projectId]);
 
     }
+
 
 }

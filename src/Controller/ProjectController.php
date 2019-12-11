@@ -48,7 +48,7 @@ class ProjectController extends AbstractController
 
         if (!$project) {
             throw $this->createNotFoundException(
-                'No project found for id '.$id
+                'No project found for id ' . $id
             );
         }
 
@@ -59,22 +59,23 @@ class ProjectController extends AbstractController
      * @Route("/update/{id}", name="project_update", methods={"GET","POST"})
      * @param Request $request
      * @param int $id
+     * @param ValidatorInterface $validator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function updateAction(Request $request,int $id, ValidatorInterface $validator)
+    public function updateAction(Request $request, int $id, ValidatorInterface $validator)
     {
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
         if (!$project) {
-            throw new \Exception('Cannot find project for id' .$id);
+            throw new \Exception('Cannot find project for id' . $id);
         }
 
 
         $form = $this->createFormBuilder($project)
-            ->add('name', TextType::class)
-            ->add('personInCharge', TextType::class)
-            ->add('keepAmount', IntegerType::class)
+            ->add('name', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('personInCharge', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('keepAmount', IntegerType::class, ['attr' => ['class' => 'ml-4']])
             ->add('save', SubmitType::class, ['label' => 'Save',
                 'attr' => [
                     'class' => 'btn btn-primary mt-3'
@@ -82,20 +83,19 @@ class ProjectController extends AbstractController
             ->getForm();
 
 
-
         $form->handleRequest($request);
         $errors = $validator->validate($project);
 
-        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)  ){
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
-            $this->addFlash('success','Action successfully completed!');
+            $this->addFlash('success', 'Action successfully completed!');
 
-            return $this->redirectToRoute('project_list');
+            return $this->redirectToRoute('project_read', ['id' => $project->getId()]);
         }
 
-        return $this->render('project/update.html.twig', ['form' => $form->createView()]);
+        return $this->render('project/update.html.twig', ['form' => $form->createView(), 'projectId' => $project->getId()]);
     }
 
     /**
@@ -110,7 +110,7 @@ class ProjectController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($project);
         $entityManager->flush();
-        $this->addFlash('success','Action successfully completed!');
+        $this->addFlash('success', 'Action successfully completed!');
 
         //$response = new Response();
         //$response->send();
@@ -120,24 +120,23 @@ class ProjectController extends AbstractController
     /**
      * @Route("/create", name="project_create", methods={"GET","POST"})
      * @param Request $request
+     * @param ValidatorInterface $validator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request, ValidatorInterface $validator)
     {
         $project = new Project();
         $form = $this->createFormBuilder($project)
-            ->add('name', TextType::class)
-            ->add('personInCharge', TextType::class)
-            ->add('keepAmount', IntegerType::class, [
+            ->add('name', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('personInCharge', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('keepAmount', IntegerType::class, ['attr' => ['class' => 'ml-4']], [
                 'empty_data' => self::DEFAULT_KEEP_AMOUNT // not sure if necessary 'cause I validate form with Validator
             ])
-
-
             ->add('save', SubmitType::class, [
                 'label' => 'Create',
-                    'attr' => [
-                        'class' => 'btn btn-primary mt-3'
-                            ]
+                'attr' => [
+                    'class' => 'btn btn-primary mt-3'
+                ]
             ])
             ->getForm();
 
@@ -146,16 +145,15 @@ class ProjectController extends AbstractController
         $errors = $validator->validate($project);
 
 
-
-        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)){
+        if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
-            $this->addFlash('success','Action successfully completed!');
-            return $this->redirectToRoute('project_list');
+            $this->addFlash('success', 'Action successfully completed!');
+            return $this->redirectToRoute('project_read', ['id' => $project->getId()]);
         }
 
-        return $this->render('project/create.html.twig',['form' => $form->createView()]);
+        return $this->render('project/create.html.twig', ['form' => $form->createView()]);
     }
 
 }

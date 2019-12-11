@@ -56,6 +56,7 @@ class ConnectionController extends AbstractController
     /**
      * @Route("/create/{id}", name="connection_create", methods={"GET","POST"})
      * @param Request $request
+     * @param ValidatorInterface $validator
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -73,10 +74,10 @@ class ConnectionController extends AbstractController
         $connection->setProject($project);
 
         $form = $this->createFormBuilder($connection)
-            ->add('username', TextType::class)
-            ->add('dbHostName', TextType::class)
-            ->add('port', IntegerType::class)
-            ->add('password', PasswordType::class)// Password is stored in plain text !!
+            ->add('username', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('dbHostName', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])// Password is stored in plain text !!
 
 
             ->add('save', SubmitType::class, [
@@ -97,31 +98,35 @@ class ConnectionController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Action successfully completed!');
 
-            return $this->redirect($request->headers->get('referer'));
+            return $this->redirectToRoute('project_read', ['id' => $project->getId()]);
         }
 
-        return $this->render('connection/create.html.twig', ['form' => $form->createView()]);
+        return $this->render('connection/create.html.twig', ['form' => $form->createView(), 'projectId' => $id]);
     }
 
     /**
      * @Route("/update/{id}", name="connection_update", methods={"GET","POST"})
      * @param Request $request
+     * @param int $id
+     * @param ValidatorInterface $validator
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
     public function updateAction(Request $request, int $id, ValidatorInterface $validator)
     {
         $connection = $this->getDoctrine()->getRepository(Connection::class)->find($id);
+        $projectId = $connection->getProject()->getId();
+
 
         if (!$connection) {
             throw new \Exception('Cannon find connection for id' . $id);
         }
 
         $form = $this->createFormBuilder($connection)
-            ->add('username', TextType::class)
-            ->add('dbHostName', TextType::class)
-            ->add('port', IntegerType::class)
-            ->add('password', PasswordType::class)// Password is stored in plain text !!
+            ->add('username', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('dbHostName', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])// Password is stored in plain text !!
 
 
             ->add('save', SubmitType::class, [
@@ -141,10 +146,10 @@ class ConnectionController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Action successfully completed!');
 
-            return $this->redirectToRoute('project_list');
+            return $this->redirectToRoute('project_read', ['id' => $projectId]);
         }
 
-        return $this->render('connection/update.html.twig', ['form' => $form->createView()]);
+        return $this->render('connection/update.html.twig', ['form' => $form->createView(), 'projectId' => $projectId]);
     }
 
 }
