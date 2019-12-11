@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\BDatabase;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -27,6 +28,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class BDatabaseController extends AbstractController
 {
+    const DB_SCHEMA_LIST = ['none','ANSI','DB2', 'MAXDB','MYSQL323', 'MYSQL40', 'MSSQL', 'MSSQL', 'ORACLE', 'TRADITIONAL'];
+    const  DB_DRIVER_LIST = ['none','odbc'];
+
     /**
      * @Route("/delete/{id}", name="bDatabase_delete", methods={"GET","DELETE"})
      * @param Request $request
@@ -74,9 +78,9 @@ class BDatabaseController extends AbstractController
             ->add('serverName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('userName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('driver', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('driver', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_DRIVER_LIST])
             ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('dbSchema', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('dbSchema', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_SCHEMA_LIST])
             //TODO: periodType = NULL
 
             ->add('save', SubmitType::class, [
