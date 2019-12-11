@@ -28,8 +28,22 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class BDatabaseController extends AbstractController
 {
-    const DB_SCHEMA_LIST = ['none','ANSI','DB2', 'MAXDB','MYSQL323', 'MYSQL40', 'MSSQL', 'MSSQL', 'ORACLE', 'TRADITIONAL'];
-    const  DB_DRIVER_LIST = ['none','odbc'];
+    // TODO Needs to be refactored :(
+    const DB_SCHEMA_LIST = [
+        'none' => null,
+        'ANSI' => 'ANSI',
+        'DB2' => 'DB2',
+        'MAXDB' => 'MAXDB',
+        'MYSQL323' => 'MYSQL323',
+        'MYSQL40' => 'MYSQL40',
+        'MSSQL' => 'MSSQL',
+        'ORACLE' => 'ORACLE',
+        'TRADITIONAL' => 'TRADITIONAL'
+    ];
+    const  DB_DRIVER_LIST = [
+        'none' => 'none',
+        'ODBC' => 'ODBC'
+    ];
 
     /**
      * @Route("/delete/{id}", name="bDatabase_delete", methods={"GET","DELETE"})
