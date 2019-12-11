@@ -130,7 +130,7 @@ class ProjectController extends AbstractController
             ->add('name', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('personInCharge', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('keepAmount', IntegerType::class, ['attr' => ['class' => 'ml-4']], [
-                'empty_data' => self::DEFAULT_KEEP_AMOUNT // not sure if necessary 'cause I validate form with Validator
+                'empty_data' => self::DEFAULT_KEEP_AMOUNT
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Create',

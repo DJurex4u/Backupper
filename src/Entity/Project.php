@@ -42,7 +42,7 @@ class Project
     //bidirectional CONNECTION
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project", cascade={"remove"})
      */
     private $connections;
 
@@ -51,7 +51,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\BDatabase", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\BDatabase", mappedBy="project", cascade={"remove"})
      */
     private $bDatabases;
 
@@ -59,14 +59,14 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\BData", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\BData", mappedBy="project", cascade={"remove"})
      */
     private $bDatas;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\StoredProject", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\StoredProject", mappedBy="project", cascade={"remove"})
      */
     private $storedProjects;
 

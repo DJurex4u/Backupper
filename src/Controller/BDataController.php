@@ -64,8 +64,8 @@ class BDataController extends AbstractController
         $bData->setProject($project);
 
         $form = $this->createFormBuilder($bData)
-            ->add('sourceDirectory', TextType::class)
-            ->add('destinationDirectory', TextType::class)
+            ->add('sourceDirectory', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('destinationDirectory', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('save', SubmitType::class, [
                 'label' => 'Create',
                 'attr' => [
@@ -108,8 +108,8 @@ class BDataController extends AbstractController
         }
 
         $form = $this->createFormBuilder($bData)
-            ->add('sourceDirectory', TextType::class)
-            ->add('destinationDirectory', TextType::class)
+            ->add('sourceDirectory', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('destinationDirectory', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('save', SubmitType::class, [
                 'label' => 'Save',
                 'attr' => [
