@@ -129,9 +129,7 @@ class ProjectController extends AbstractController
         $form = $this->createFormBuilder($project)
             ->add('name', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('personInCharge', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('keepAmount', IntegerType::class, ['attr' => ['class' => 'ml-4']], [
-                'empty_data' => self::DEFAULT_KEEP_AMOUNT
-            ])
+            ->add('keepAmount', IntegerType::class, ['attr' => ['class' => 'ml-4']])
             ->add('save', SubmitType::class, [
                 'label' => 'Create',
                 'attr' => [
