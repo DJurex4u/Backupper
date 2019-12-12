@@ -37,7 +37,6 @@ class BDatabase
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull()
      */
     private $driver;
 
@@ -49,7 +48,6 @@ class BDatabase
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull()
      */
     private $dbSchema;
 

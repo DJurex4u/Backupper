@@ -29,8 +29,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class BDatabaseController extends AbstractController
 {
     // TODO Needs to be refactored :(
+    const  DB_DRIVER_LIST = [
+        'none' => 'none',
+        'ODBC' => 'ODBC'
+    ];
+
     const DB_SCHEMA_LIST = [
-        'none' => null,
+        'none' => 'none',
         'ANSI' => 'ANSI',
         'DB2' => 'DB2',
         'MAXDB' => 'MAXDB',
@@ -40,10 +45,7 @@ class BDatabaseController extends AbstractController
         'ORACLE' => 'ORACLE',
         'TRADITIONAL' => 'TRADITIONAL'
     ];
-    const  DB_DRIVER_LIST = [
-        'none' => 'none',
-        'ODBC' => 'ODBC'
-    ];
+
 
     /**
      * @Route("/delete/{id}", name="bDatabase_delete", methods={"GET","DELETE"})
@@ -143,9 +145,9 @@ class BDatabaseController extends AbstractController
             ->add('serverName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('userName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('driver', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('driver', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_DRIVER_LIST])
             ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('dbSchema', TextType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('dbSchema', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_SCHEMA_LIST])
             //TODO: periodType = NULL
 
             ->add('save', SubmitType::class, [
