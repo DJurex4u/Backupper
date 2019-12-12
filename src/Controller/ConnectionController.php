@@ -28,6 +28,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class ConnectionController extends AbstractController
 {
+    const DEFAULT_CHIPPER = 'AES-128-GCM';
+    const DEFAULT_ENCRYPTION_KEY = 'bilaMaMAkukunka#';
+    const DEFAULT_ENCRYPTION_IV = '0000';
+
     /**
      * @Route("/delete/{id}", name="connection_delete", methods={"GET", "DELETE"})
      * @param Request $request
@@ -77,9 +81,7 @@ class ConnectionController extends AbstractController
             ->add('username', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('dbHostName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])// Password is stored in plain text !!
-
-
+            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
             ->add('save', SubmitType::class, [
                 'label' => 'Create',
                 'attr' => [
@@ -88,11 +90,16 @@ class ConnectionController extends AbstractController
             ])
             ->getForm();
 
+
         $form->handleRequest($request);
         $errors = $validator->validate($connection);
 
 
         if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
+            $passwordToBeEncrypted = $request->get('form')['password'];
+            $encryptedPassword = openssl_encrypt($passwordToBeEncrypted, self::DEFAULT_CHIPPER, self::DEFAULT_ENCRYPTION_KEY, $options = 0, self::DEFAULT_ENCRYPTION_IV);
+            $connection->setPassword($encryptedPassword);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();

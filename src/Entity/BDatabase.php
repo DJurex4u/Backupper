@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use App\Entity\Interfaces\IEncryptable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -8,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DatabaseRepository")
  */
-class BDatabase
+class BDatabase implements IEncryptable
 {
     /**
      * @ORM\Id()
@@ -188,5 +189,20 @@ class BDatabase
         $this->connections = $connections;
 
         return $this;
+    }
+
+    public function getPassphrase(): string
+    {
+        // TODO: Implement getPassphrase() method.
+    }
+
+    public function getIv(): string
+    {
+        // TODO: Implement getIv() method.
+    }
+
+    public function setIv(): void
+    {
+        // TODO: Implement setIv() method.
     }
 }
