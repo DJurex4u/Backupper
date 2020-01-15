@@ -25,9 +25,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class BDataController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="bData_delete", methods={"GET"})
+     * @Route("/delete/{id}", name="bData_delete", methods={"POST"})
      * @param Request $request
-     * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
