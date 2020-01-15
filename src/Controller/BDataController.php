@@ -17,10 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class BDataController
+ * @package App\Controller
+ * @Route("/bdata")
+ */
 class BDataController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="bData_delete", methods={"GET", "DELETE"})
+     * @Route("/delete/{id}", name="bData_delete", methods={"GET"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
