@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: UHP Digital
- * Date: 12/5/2019
- * Time: 12:34 PM
- */
 
 namespace App\Controller;
-
 
 use App\Entity\Connection;
 use App\Entity\Project;
