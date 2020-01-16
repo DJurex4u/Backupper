@@ -16,9 +16,12 @@
                 <tr>
                     <td>{{ project.name }}</td>
                     <td>
-                        <a href="{{ path('project_read', {id: project.id}) }}" class="btn btn-dark">Read</a>
-                        <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Update</a>
-                        <a href="{{ path('project_delete', {id: project.id}) }}" class="btn btn-danger delete-project" onclick="return confirm('Are you sure?')">Delete</a>
+                        <form action="{{ path('project_delete', {id: project.id}) }}" method="post">
+
+                            <a href="{{ path('project_read', {id: project.id}) }}" class="btn btn-dark">Read</a>
+                            <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Update</a>
+                            <input type="submit" value="Delete" class = "btn btn-danger delete-project" onclick="return confirm('Are you sure?')">
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

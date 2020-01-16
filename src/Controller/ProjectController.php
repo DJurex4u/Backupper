@@ -98,7 +98,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="project_delete", methods={"GET", "DELETE"})
+     * @Route("/delete/{id}", name="project_delete", methods={"POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
