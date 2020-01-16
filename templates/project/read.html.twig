@@ -113,18 +113,11 @@
                 <td>{{ bData.sourceDirectory }}</td>
                 <td>{{ bData.destinationDirectory }}</td>
                 <td>
-
-                    <a href=" {{ path('bData_update', {id: bData.id}) }} " class = "btn btn-light">Update</a>
-
-                    {# GET Delete #}
-                    {#
-                    <a href=" {{ path('bData_delete', {id: bData.id}) }} " class = "btn btn-danger delete-project"
-                       onclick=" return confirm('Are you sure?') ">Delete</a>#}
-
-                    {# POST Delete #}
                     <form action="{{ path('bData_delete', {id: bData.id}) }}"  method="post">
-                        <input type="submit" value="Delete" class = "btn btn-danger delete-project"  onclick="return confirm('Are you sure!')">
+                        <a href=" {{ path('bData_update', {id: bData.id}) }} " class = "btn btn-light">Update</a>
+                        <input type="submit" value="Delete" class = "btn btn-danger delete-project inline-block"  onclick="return confirm('Are you sure!')"> {#delete w/ POST#}
                     </form>
+
 
                 </td>
             </tr>
