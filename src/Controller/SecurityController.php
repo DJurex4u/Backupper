@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
-class SecurityController extends  AbstractController{
+class SecurityController extends AbstractController
+{
 
     /**
      * @Route("/login", name="login")
@@ -16,20 +17,22 @@ class SecurityController extends  AbstractController{
      * @param AuthenticationUtils $utils
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function login(Request $request, AuthenticationUtils $utils){
-
+    public function login(Request $request, AuthenticationUtils $utils)
+    {
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
 
-        return $this->render(   'security/login.html.twig',[
-                                'error' => $error,
-                                'last_username'=>$lastUsername
-        ]);
+        return $this->render('security/login.html.twig',
+            ['error' => $error,
+                'last_username' => $lastUsername]
+        );
     }
 
     /**
      * @Route("/logout", name="logout")
      */
+
     public function logout(){
+
     }
 }
