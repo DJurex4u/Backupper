@@ -22,7 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ConnectionController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="connection_delete", methods={"GET", "DELETE"})
+     * @Route("/delete/{id}", name="connection_delete", methods={"POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response

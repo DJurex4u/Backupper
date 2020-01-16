@@ -40,10 +40,10 @@
                 <td>{{ connection.dbHostName }}</td>
                 <td>{{ connection.port }}</td>
                 <td>
-                    <a href=" {{ path('connection_update', {id: connection.id}) }} " class="btn btn-light">Update</a>
-                    <a href=" {{ path('connection_delete', {id: connection.id}) }}"
-                       class="btn btn-danger delete-project"
-                       onclick="return confirm('Are you sure?')">Delete</a>
+                    <form action="{{ path('connection_delete', {id: connection.id}) }}" method="post">
+                        <a href=" {{ path('connection_update', {id: connection.id}) }} " class="btn btn-light">Update</a>
+                        <input type="submit" value="Delete" class="btn btn-danger delete-project" onclick="return confirm('Are you sure!')">
+                    </form>
                 </td>
             </tr>
         {% endfor %}
@@ -116,7 +116,7 @@
                 <td>
                     <form action="{{ path('bData_delete', {id: bData.id}) }}"  method="post">
                         <a href=" {{ path('bData_update', {id: bData.id}) }} " class = "btn btn-light">Update</a>  {# GET #}
-                        <input type="submit" value="Delete" class = "btn btn-danger delete-project inline-block"  onclick="return confirm('Are you sure!')"> {# POST #}
+                        <input type="submit" value="Delete" class = "btn btn-danger delete-project"  onclick="return confirm('Are you sure!')"> {# POST #}
                     </form>
 
 
