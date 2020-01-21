@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Connection;
+use App\Entity\Interfaces\IEncryptable;
 use App\Entity\Project;
+use App\Service\Encryptor;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,13 +29,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  * @package App\Controller
  * @Route("/connection")
  */
-class ConnectionController extends AbstractController //implements IEncryptable
+class ConnectionController extends AbstractController
 {
-    const DEFAULT_CHIPPER = 'AES-128-GCM';
-    const DEFAULT_ENCRYPTION_KEY = 'bilaMaMAkukunka#';
-    const DEFAULT_ENCRYPTION_IV = '0000';
-    const DEFAULT_TAG = 0;
-
     /**
      * @Route("/delete/{id}", name="connection_delete", methods={"GET", "DELETE"})
      * @param Request $request
@@ -98,15 +95,7 @@ class ConnectionController extends AbstractController //implements IEncryptable
 
 
         if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
-            $passwordToBeEncrypted = $request->get('form')['password'];
 
-            $tag = null;
-            $encryptedPassword = openssl_encrypt($passwordToBeEncrypted, self::DEFAULT_CHIPPER, self::DEFAULT_ENCRYPTION_KEY, $options = 0, self::DEFAULT_ENCRYPTION_IV, $tag );
-            die($encryptedPassword);
-            $connection->setPassword($encryptedPassword);
-
-
-            $gpg_encryption->
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
@@ -165,5 +154,4 @@ class ConnectionController extends AbstractController //implements IEncryptable
 
         return $this->render('connection/update.html.twig', ['form' => $form->createView(), 'projectId' => $projectId]);
     }
-
 }

@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\IEncryptable;
+use App\Service\Encryptor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConnectionRepository")
  */
-class Connection
+class Connection implements IEncryptable
 {
     /**
      * @ORM\Id()
@@ -60,6 +62,29 @@ class Connection
      */
     private $bDatabase;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $iv;
+
+
+    /**
+     * @var Encryptor $encryptor
+     */
+    private $encryptor;
+
+    /**
+     * Connection constructor.
+     */
+    public function __construct()
+    {
+        $this->encryptor = new Encryptor();
+    }
+
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,17 +102,7 @@ class Connection
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
 
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
     public function getPort(): ?int
     {
@@ -152,4 +167,50 @@ class Connection
 
         return $this;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getIv(): ?string
+    {
+        return $this->iv;
+    }
+
+    public function setIv(): IEncryptable
+    {
+        $this->iv = $this->encryptor->generateIV();
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        die('ajd da vidim');
+        return('hello');
+        $decryptpassword = $this->encryptor->decrypt($this->password, $this);
+        return $decryptpassword;
+    }
+
+    /**
+     * @param string $password
+     * @return Connection
+     */
+    public function setPassword(string $password): IEncryptable
+    {
+        $this->password = $this->encryptor->encrypt($password, $this);
+        return $this;
+    }
+
 }
