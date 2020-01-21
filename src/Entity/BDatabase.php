@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DatabaseRepository")
  */
-class BDatabase implements IEncryptable
+class BDatabase
 {
     /**
      * @ORM\Id()

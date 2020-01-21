@@ -21,16 +21,18 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
+
 /**
  * Class ConnectionController
  * @package App\Controller
  * @Route("/connection")
  */
-class ConnectionController extends AbstractController
+class ConnectionController extends AbstractController //implements IEncryptable
 {
     const DEFAULT_CHIPPER = 'AES-128-GCM';
     const DEFAULT_ENCRYPTION_KEY = 'bilaMaMAkukunka#';
     const DEFAULT_ENCRYPTION_IV = '0000';
+    const DEFAULT_TAG = 0;
 
     /**
      * @Route("/delete/{id}", name="connection_delete", methods={"GET", "DELETE"})
@@ -97,9 +99,14 @@ class ConnectionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
             $passwordToBeEncrypted = $request->get('form')['password'];
-            $encryptedPassword = openssl_encrypt($passwordToBeEncrypted, self::DEFAULT_CHIPPER, self::DEFAULT_ENCRYPTION_KEY, $options = 0, self::DEFAULT_ENCRYPTION_IV);
+
+            $tag = null;
+            $encryptedPassword = openssl_encrypt($passwordToBeEncrypted, self::DEFAULT_CHIPPER, self::DEFAULT_ENCRYPTION_KEY, $options = 0, self::DEFAULT_ENCRYPTION_IV, $tag );
+            die($encryptedPassword);
             $connection->setPassword($encryptedPassword);
 
+
+            $gpg_encryption->
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
