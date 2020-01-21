@@ -45,6 +45,9 @@ class Encryptor implements EncryptorInterface
 
     public function decrypt(string $stringToBeDecrypted, IEncryptable $encryptable): string
     {
+        if ($stringToBeDecrypted){
+            return null;
+        }
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);  //TODO: hardcoded return of function
 
         $originalPassword = openssl_decrypt($stringToBeDecrypted, self::CHIPPER, $passphrase, OPENSSL_RAW_DATA, $encryptable->getIv(), $this->tag);

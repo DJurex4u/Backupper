@@ -66,6 +66,8 @@ class ConnectionController extends AbstractController
     public function createAction(Request $request, ValidatorInterface $validator, int $id)
     {
         $connection = new Connection();
+
+
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
         if (!$project) {
@@ -89,8 +91,12 @@ class ConnectionController extends AbstractController
             ])
             ->getForm();
 
+        die();
+
 
         $form->handleRequest($request);
+
+
         $errors = $validator->validate($connection);
 
 

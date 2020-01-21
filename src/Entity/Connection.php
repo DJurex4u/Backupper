@@ -195,10 +195,14 @@ class Connection implements IEncryptable
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
-        die('ajd da vidim');
-        return('hello');
+
+      if (!$this->password) {   //TODO: RIJEŠI TAJ NULL
+          return null;
+      }
+
+//        return null;
         $decryptpassword = $this->encryptor->decrypt($this->password, $this);
         return $decryptpassword;
     }
