@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Connection{% endblock %}
+
+{% block body %}
+    <a href="{{ path('project_read', {id: projectId}) }}" class="btn btn-primary"  role="button">Go Back</a>
+    <hr>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    {# TODO: BData, BDatabases (can be NULL) #}
+
+
+
+
+{% endblock %}

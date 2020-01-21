@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConnectionRepository")
@@ -19,35 +19,44 @@ class Connection
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $password;
 
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\NotNull()
      */
     private $port;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $dbHostName;
 
     /**
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="connections")
      * @ORM\JoinColumn(nullable=false, name="project_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $project;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\BData", inversedBy="connections")
-     * @ORM\JoinColumn(nullable=false, name="b_data_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, name="b_data_id", referencedColumnName="id")
      */
     private $bData;
 
     /**
      * @ORM\ManyToOne(targetEntity="BDatabase", inversedBy="connections")
-     * @ORM\JoinColumn(nullable=false, name="b_database_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, name="b_database_id", referencedColumnName="id")
      */
     private $bDatabase;
 
@@ -80,16 +89,32 @@ class Connection
         return $this;
     }
 
-    public function getPort(): ?integer
+    public function getPort(): ?int
     {
         return $this->port;
     }
 
-    public function setPort(integer $port): self
+    public function setPort(int $port): self
     {
         $this->port = $port;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDbHostName()
+    {
+        return $this->dbHostName;
+    }
+
+    /**
+     * @param mixed $dbHostName
+     */
+    public function setDbHostName($dbHostName): void
+    {
+        $this->dbHostName = $dbHostName;
     }
 
     public function getProject(): ?Project

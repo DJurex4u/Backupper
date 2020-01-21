@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ project.name }}</h1>
+    <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Update</a>
+    <a href="{{ path('project_delete', {id: project.id}) }}" class="btn btn-danger delete-project"
+       onclick="return confirm('Are you sure?')">Delete</a>
+    <a href="{{ path('project_list') }}" class="btn btn-primary" role="button">Go Back</a>
+    <hr>
+    <p>Project id: {{ project.id }}</p>
+    <p>Person in charge: {{ project.personInCharge }}</p>
+    <p>Keep amount: {{ project.keepAmount }}</p>
+
+    {% set connectionsCount = project.connections.count %}
+    {% set databasesCount = project.bDatabases.count %}
+    {% set datasCount = project.bDatas.count %}
+
+    {#CONNECTIONS#}
+    <h3> Connections </h3>
+    {% if not connectionsCount %}
+        <p>No Connections to display</p>
+    {% endif %}
+    <a href=" {{ path('connection_create', {id: project.id}) }} " class="btn btn-primary">New Connection</a>
+    {% if connectionsCount %}
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Host Name</th>
+            <th>Port</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for connection in project.connections %}
+            <tr>
+                <td>{{ connection.username }}</td>
+                <td>{{ connection.dbHostName }}</td>
+                <td>{{ connection.port }}</td>
+                <td>
+                    <form action="{{ path('connection_delete', {id: connection.id}) }}" method="post">
+                        <a href=" {{ path('connection_update', {id: connection.id}) }} " class="btn btn-light">Update</a>
+                        <input type="submit" value="Delete" class="btn btn-danger delete-project" onclick="return confirm('Are you sure!')">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    {% endif %}
+    </tbody>
+    </table>
+
+    {#DATABASES#}
+    <h3>Databases</h3>
+    {% if not databasesCount %}
+        <P>No Databases to display</p>
+    {% endif %}
+    <a href=" {{ path('bDatabase_create', {id: project.id}) }} " class="btn btn-primary">New Database</a>
+
+    {% if databasesCount %}
+
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Driver</th>
+            <th>Port</th>
+            <th>DB Scheme</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bDatabase in project.bDatabases %}
+            <tr>
+                <td>{{ bDatabase.serverName }}</td>
+                <td>{{ bDatabase.username }}</td>
+                <td>{{ bDatabase.driver }}</td>
+                <td>{{ bDatabase.port }}</td>
+                <td>{{ bDatabase.dbSchema }}</td>
+                <td>
+                    <form action="{{ path('bDatabase_delete', {id: bDatabase.id}) }}" method="post">
+                        <a href=" {{ path('bDatabase_update', {id: bDatabase.id}) }} " class="btn btn-light">Update</a>
+                        <input type="submit" value="Delete" class = "btn btn-danger delete-project" onclick="return confirm('Are you sure!')">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    </tbody>
+    </table>
+
+    {#DATA#}
+    <h3>Data</h3>
+    {% if not datasCount %}
+        <p>No Connections to display</p>
+    {% endif %}
+    <a href=" {{ path('bData_create', {id: project.id}) }} " class="btn btn-primary">New Data</a>
+    {% if datasCount %}
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bData in project.bDatas %}
+            <tr>
+                <td>{{ bData.sourceDirectory }}</td>
+                <td>{{ bData.destinationDirectory }}</td>
+                <td>
+                    <form action="{{ path('bData_delete', {id: bData.id}) }}"  method="post">
+                        <a href=" {{ path('bData_update', {id: bData.id}) }} " class = "btn btn-light">Update</a>  {# GET #}
+                        <input type="submit" value="Delete" class = "btn btn-danger delete-project"  onclick="return confirm('Are you sure!')"> {# POST #}
+                    </form>
+
+
+                </td>
+            </tr>
+        {% endfor %}
+
+    {% endif %}
+    </tbody>
+    </table>
+
+{% endblock %}
+
+

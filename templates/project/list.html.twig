@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project List Articles{% endblock %}
+
+{% block body %}
+    {% if projects %}
+        <table id="projects" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Projects</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>
+                        <form action="{{ path('project_delete', {id: project.id}) }}" method="post">
+
+                            <a href="{{ path('project_read', {id: project.id}) }}" class="btn btn-dark">Read</a>
+                            <a href="{{ path('project_update', {id: project.id}) }}" class="btn btn-light">Update</a>
+                            <input type="submit" value="Delete" class = "btn btn-danger delete-project" onclick="return confirm('Are you sure?')">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No projects to display</p>
+    {% endif %}
+{% endblock %}
+
+

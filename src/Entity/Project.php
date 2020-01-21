@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
@@ -19,24 +21,28 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
      */
     private $personInCharge;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull()
+     * @Assert\GreaterThan(2)
+     *
      */
     private $keepAmount;
 
     //bidirectional CONNECTION
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\Connection", mappedBy="project", cascade={"remove"})
      */
     private $connections;
 
@@ -44,7 +50,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\BDatabase", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\BDatabase", mappedBy="project", cascade={"remove"})
      */
     private $bDatabases;
 
@@ -52,14 +58,14 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\BData", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\BData", mappedBy="project", cascade={"remove"})
      */
     private $bDatas;
 
     /**
-     *  @var \Doctrine\Common\Collections\ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\StoredProject", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\StoredProject", mappedBy="project", cascade={"remove"})
      */
     private $storedProjects;
 
@@ -81,7 +87,7 @@ class Project
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -93,7 +99,7 @@ class Project
         return $this->personInCharge;
     }
 
-    public function setPersonInCharge(string $personInCharge): self
+    public function setPersonInCharge(?string $personInCharge): self
     {
         $this->personInCharge = $personInCharge;
 
@@ -144,9 +150,9 @@ class Project
     }
 
     /**
-     * @return ArrayCollection
+     * @return PersistentCollection
      */
-    public function getConnections(): ArrayCollection
+    public function getConnections(): PersistentCollection
     {
         return $this->connections;
     }
@@ -162,9 +168,9 @@ class Project
     }
 
     /**
-     * @return ArrayCollection
+     * @return PersistentCollection
      */
-    public function getBDatabases(): ArrayCollection
+    public function getBDatabases(): PersistentCollection
     {
         return $this->bDatabases;
     }
@@ -193,9 +199,9 @@ class Project
     }
 
     /**
-     * @return ArrayCollection
+     * @return PersistentCollection
      */
-    public function getBDatas(): ArrayCollection
+    public function getBDatas(): PersistentCollection
     {
         return $this->bDatas;
     }
@@ -210,7 +216,7 @@ class Project
         return $this;
     }
 
-    public function removeBData (BDatabase $bData): self
+    public function removeBData(BDatabase $bData): self
     {
         if ($this->bDatas->contains($bData)) {
             $this->bDatas->removeElement($bData);

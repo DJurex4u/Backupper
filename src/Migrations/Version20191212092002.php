@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191127092625 extends AbstractMigration
+final class Version20191212092002 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,14 +22,14 @@ final class Version20191127092625 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE bdata (id INT AUTO_INCREMENT NOT NULL, project_id INT NOT NULL, period_type_id INT NOT NULL, source_directory VARCHAR(255) NOT NULL, destination_directory VARCHAR(255) NOT NULL, INDEX IDX_A967FF4F166D1F9C (project_id), INDEX IDX_A967FF4F3EA529CB (period_type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE bdatabase (id INT AUTO_INCREMENT NOT NULL, project_id INT NOT NULL, period_type_id INT NOT NULL, sever_name VARCHAR(255) NOT NULL, user_name VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, driver VARCHAR(255) NOT NULL, port VARCHAR(255) NOT NULL, db_schema VARCHAR(255) NOT NULL, INDEX IDX_38ED64CB166D1F9C (project_id), INDEX IDX_38ED64CB3EA529CB (period_type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE connection (id INT AUTO_INCREMENT NOT NULL, project_id INT NOT NULL, b_data_id INT NOT NULL, b_database_id INT NOT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, port INT NOT NULL, INDEX IDX_29F77366166D1F9C (project_id), INDEX IDX_29F77366B20322A4 (b_data_id), INDEX IDX_29F77366B41954DD (b_database_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE bdata (id INT AUTO_INCREMENT NOT NULL, project_id INT NOT NULL, period_type_id INT DEFAULT NULL, source_directory VARCHAR(255) NOT NULL, destination_directory VARCHAR(255) NOT NULL, INDEX IDX_A967FF4F166D1F9C (project_id), INDEX IDX_A967FF4F3EA529CB (period_type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE bdatabase (id INT AUTO_INCREMENT NOT NULL, project_id INT NOT NULL, period_type_id INT DEFAULT NULL, server_name VARCHAR(255) NOT NULL, user_name VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, driver VARCHAR(255) NOT NULL, port VARCHAR(255) NOT NULL, db_schema VARCHAR(255) NOT NULL, INDEX IDX_38ED64CB166D1F9C (project_id), INDEX IDX_38ED64CB3EA529CB (period_type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE connection (id INT AUTO_INCREMENT NOT NULL, project_id INT NOT NULL, b_data_id INT DEFAULT NULL, b_database_id INT DEFAULT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, port INT NOT NULL, db_host_name VARCHAR(255) NOT NULL, INDEX IDX_29F77366166D1F9C (project_id), INDEX IDX_29F77366B20322A4 (b_data_id), INDEX IDX_29F77366B41954DD (b_database_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE period_type (id INT AUTO_INCREMENT NOT NULL, frequency VARCHAR(255) NOT NULL, start_date_time DATETIME NOT NULL, end_date_time DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE project (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, person_in_charge VARCHAR(255) NOT NULL, keep_amount INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE role (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE role (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE stored_project (id INT AUTO_INCREMENT NOT NULL, project_id INT NOT NULL, is_persistent TINYINT(1) NOT NULL, created_at DATETIME NOT NULL, INDEX IDX_C9E81066166D1F9C (project_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, role_id INT NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, INDEX IDX_8D93D649D60322AC (role_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, role_id INT NOT NULL, email VARCHAR(255) NOT NULL, credentials VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, INDEX IDX_8D93D649D60322AC (role_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE bdata ADD CONSTRAINT FK_A967FF4F166D1F9C FOREIGN KEY (project_id) REFERENCES project (id)');
         $this->addSql('ALTER TABLE bdata ADD CONSTRAINT FK_A967FF4F3EA529CB FOREIGN KEY (period_type_id) REFERENCES period_type (id)');
         $this->addSql('ALTER TABLE bdatabase ADD CONSTRAINT FK_38ED64CB166D1F9C FOREIGN KEY (project_id) REFERENCES project (id)');
