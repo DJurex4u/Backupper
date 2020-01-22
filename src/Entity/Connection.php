@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Interfaces\IEncryptable;
 use App\Service\Encryptor;
+use App\Service\EncryptorInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -75,10 +76,11 @@ class Connection implements IEncryptable
 
     /**
      * Connection constructor.
+     * @param EncryptorInterface $encryptor
      */
-    public function __construct()
+    public function __construct(EncryptorInterface $encryptor)
     {
-        $this->encryptor = new Encryptor();
+        $this->encryptor = $encryptor;
     }
 
 
@@ -195,14 +197,8 @@ class Connection implements IEncryptable
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-
-      if (!$this->password) {   //TODO: RIJEŠI TAJ NULL
-          return null;
-      }
-
-//        return null;
         $decryptpassword = $this->encryptor->decrypt($this->password, $this);
         return $decryptpassword;
     }

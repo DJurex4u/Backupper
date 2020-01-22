@@ -91,7 +91,7 @@ class ConnectionController extends AbstractController
             ])
             ->getForm();
 
-        die();
+
 
 
         $form->handleRequest($request);

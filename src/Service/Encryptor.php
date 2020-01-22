@@ -17,20 +17,12 @@ class Encryptor implements EncryptorInterface
     private $passphrase;
 
 
-    //idk what $tag does, but it has to be defined as variable since openssl_encrypt functiong expects &$tag to write something and needed to be passed to openssl_decrypt to read it
+    /**
+     * @var string
+     * idk what $tag does, but openssl_encrypt functiong expects &$tag to write something and needed to be passed to openssl_decrypt to read it
+     */
     private $tag = '';
 
-
-//    /**
-//     * Encryptor constructor.
-//     * @param string $passphrase
-//     */
-//    public function __construct(
-//        string $passphrase
-//    )
-//    {
-//        $this->bDatabasePassphrase = $passphrase;
-//    }
 
 
     public function encrypt(string $stringToBeEncrypted, IEncryptable $encryptable): string
@@ -43,12 +35,12 @@ class Encryptor implements EncryptorInterface
         return $encryptedPassword;
     }
 
-    public function decrypt(string $stringToBeDecrypted, IEncryptable $encryptable): string
+    public function decrypt(?string $stringToBeDecrypted, IEncryptable $encryptable): ?string
     {
-        if ($stringToBeDecrypted){
+        if (!$stringToBeDecrypted){
             return null;
         }
-        $passphrase = $this->fetchEncryptorPassphrase($encryptable);  //TODO: hardcoded return of function
+        $passphrase = $this->fetchEncryptorPassphrase($encryptable);
 
         $originalPassword = openssl_decrypt($stringToBeDecrypted, self::CHIPPER, $passphrase, OPENSSL_RAW_DATA, $encryptable->getIv(), $this->tag);
 
