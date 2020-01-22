@@ -63,9 +63,9 @@ class ConnectionController extends AbstractController
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request, ValidatorInterface $validator, int $id)
+    public function createAction(Request $request, ValidatorInterface $validator, int $id, Encryptor $encryptor)
     {
-        $connection = new Connection();
+        $connection = new Connection($encryptor);
 
 
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);

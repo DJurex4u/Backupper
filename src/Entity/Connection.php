@@ -76,9 +76,9 @@ class Connection implements IEncryptable
 
     /**
      * Connection constructor.
-     * @param EncryptorInterface $encryptor
+     * @param Encryptor $encryptor
      */
-    public function __construct(EncryptorInterface $encryptor)
+    public function __construct(Encryptor $encryptor)
     {
         $this->encryptor = $encryptor;
     }
