@@ -61,6 +61,7 @@ class ConnectionController extends AbstractController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @param int $id
+     * @param Encryptor $encryptor
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request, ValidatorInterface $validator, int $id, Encryptor $encryptor)

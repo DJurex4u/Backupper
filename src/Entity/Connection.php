@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Entity\Interfaces\IEncryptable;
 use App\Service\Encryptor;
-use App\Service\EncryptorInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
