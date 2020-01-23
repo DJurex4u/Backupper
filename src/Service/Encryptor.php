@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Entity\Interfaces\IEncryptable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Encryptor implements EncryptorInterface
 {
@@ -23,6 +24,15 @@ class Encryptor implements EncryptorInterface
      */
     private $tag = '';
 
+    /**
+     * @var ParameterBagInterface
+     */
+    private $parameterBag;
+
+    public function __construct(ParameterBagInterface $parameterBag)
+    {
+        $this->parameterBag = $parameterBag;
+    }
 
 
     public function encrypt(string $stringToBeEncrypted, IEncryptable $encryptable): string
@@ -53,19 +63,20 @@ class Encryptor implements EncryptorInterface
         return substr(md5(mt_rand()), 0, 10);
     }
 
+    /**
+     * @param IEncryptable $encryptable
+     * @return string
+     */
     function fetchEncryptorPassphrase(IEncryptable $encryptable): string
     {
-
-        // TODO revalidate function, implement fetchEncryptorPassphrase() method.
-        return 'passphrase';
-
-
-//        switch (get_class($encryptable)) {
-//            case 'App\Entity\Connection.php':
-//                return $this->ConnectionPassphrase;
-//            default:
-//                return false;
-//        }
+        switch (get_class($encryptable)) {
+            case 'App\Entity\Connection':
+                return $this->parameterBag->get("passphrases_connection");
+            case 'App\Entity\BDatabase':
+                return $this->parameterBag->get("passphrases_database");
+            default:
+                return false;
+        }
 
     }
 }
