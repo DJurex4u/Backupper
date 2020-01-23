@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 use App\Entity\Interfaces\IEncryptable;
+use App\Service\Encryptor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DatabaseRepository")
  */
-class BDatabase
+class BDatabase implements IEncryptable
 {
     /**
      * @ORM\Id()
@@ -72,9 +73,20 @@ class BDatabase
      */
     private $connections;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $iv;
 
-    public function __construct() {
+    /**
+     * @var Encryptor $encryptor
+     */
+    private $encryptor;
+
+
+    public function __construct(Encryptor $encryptor) {
         $this->connections = new ArrayCollection();
+        $this->encryptor = $encryptor;
     }
 
     public function getId(): ?int
@@ -108,13 +120,13 @@ class BDatabase
 
     public function getPassword(): ?string
     {
-        return $this->password;
+        $decryptpassword = $this->encryptor->decrypt($this->password, $this);
+        return $decryptpassword;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): IEncryptable
     {
-        $this->password = $password;
-
+        $this->password = $this->encryptor->encrypt($password, $this);
         return $this;
     }
 
@@ -191,18 +203,14 @@ class BDatabase
         return $this;
     }
 
-    public function getPassphrase(): string
-    {
-        // TODO: Implement getPassphrase() method.
-    }
-
     public function getIv(): string
     {
-        // TODO: Implement getIv() method.
+        return $this->iv;
     }
 
-    public function setIv(): void
+    public function setIv(): IEncryptable
     {
-        // TODO: Implement setIv() method.
+        $this->iv = $this->encryptor->generateIV();
+        return $this;
     }
 }
