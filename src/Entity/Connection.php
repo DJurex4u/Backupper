@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConnectionRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Connection implements IEncryptable
 {
@@ -77,9 +78,9 @@ class Connection implements IEncryptable
      * Connection constructor.
      * @param Encryptor $encryptor
      */
-    public function __construct(Encryptor $encryptor)
+    public function __construct()
     {
-        $this->encryptor = $encryptor;
+
     }
 
 
@@ -170,13 +171,12 @@ class Connection implements IEncryptable
     }
 
 
-
-
-
-
-
-
-
+    /**
+     * @ORM\PostLoad()
+     * @ORM\PrePersist()
+     */
+    public function kita() {
+    }
 
 
 
@@ -198,6 +198,7 @@ class Connection implements IEncryptable
 
     public function getPassword(): ?string
     {
+        return "******  test u Connection::getPassword";
         $decryptpassword = $this->encryptor->decrypt($this->password, $this);
         return $decryptpassword;
     }

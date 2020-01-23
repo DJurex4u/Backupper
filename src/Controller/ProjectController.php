@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Connection;
 use App\Entity\Project;
+use App\Service\Encryptor;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -43,9 +44,10 @@ class ProjectController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function readAction(Request $request, int $id)
+    public function readAction(Request $request, int $id, Encryptor $encryptor)
     {
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
+
 
         if (!$project) {
             throw $this->createNotFoundException(

@@ -36,8 +36,8 @@
         <tbody>
         {% for connection in project.connections %}
             <tr>
-                <td>{{ connection.username }}</td>
-                <td>{{ connection.dbHostName }}</td>
+                <td>{{ connection.username }}  </td>
+                <td>{{ connection.dbHostName }} {{ connection.password }}</td>
                 <td>{{ connection.port }}</td>
                 <td>
                     <a href=" {{ path('connection_update', {id: connection.id}) }} " class="btn btn-light">Update</a>
