@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: UHP Digital
- * Date: 12/5/2019
- * Time: 12:34 PM
- */
 
 namespace App\Controller;
-
 
 use App\Entity\Connection;
 use App\Entity\Interfaces\IEncryptable;
@@ -32,7 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ConnectionController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="connection_delete", methods={"GET", "DELETE"})
+     * @Route("/delete/{id}", name="connection_delete", methods={"POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response

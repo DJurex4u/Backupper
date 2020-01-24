@@ -3,14 +3,12 @@
 namespace App\Controller;
 
 
-use App\Entity\Connection;
 use App\Entity\Project;
 use App\Service\Encryptor;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -102,7 +100,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="project_delete", methods={"GET", "DELETE"})
+     * @Route("/delete/{id}", name="project_delete", methods={"POST"})
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
