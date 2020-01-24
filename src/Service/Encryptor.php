@@ -37,7 +37,6 @@ class Encryptor implements EncryptorInterface
 
     public function encrypt(string $stringToBeEncrypted, IEncryptable $encryptable): string
     {
-        // TODO:
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);
 
         $encryptable->setIv();

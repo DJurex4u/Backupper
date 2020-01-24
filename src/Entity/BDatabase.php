@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DatabaseRepository")
  */
-class BDatabase implements IEncryptable
+class BDatabase //implements IEncryptable
 {
     /**
      * @ORM\Id()
@@ -64,7 +64,6 @@ class BDatabase implements IEncryptable
      * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bDatabases")
      * @ORM\JoinColumn(nullable=true, name="period_type_id", referencedColumnName="id")
      */
-    //TODO: @Assert\NotNull()
     private $periodType;
 
     /**

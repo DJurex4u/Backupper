@@ -72,17 +72,7 @@ class Connection implements IEncryptable
     /**
      * @var Encryptor $encryptor
      */
-    private $encryptor;
-
-    /**
-     * Connection constructor.
-     * @param Encryptor $encryptor
-     */
-    public function __construct()
-    {
-
-    }
-
+    private $encryptor;   //TODO: UNUSED
 
 
 
@@ -171,12 +161,7 @@ class Connection implements IEncryptable
     }
 
 
-    /**
-     * @ORM\PostLoad()
-     * @ORM\PrePersist()
-     */
-    public function kita() {
-    }
+
 
 
 
@@ -192,15 +177,16 @@ class Connection implements IEncryptable
 
     public function setIv(): IEncryptable
     {
-        $this->iv = $this->encryptor->generateIV();
+        $this->iv = 'harcodeded';
+//        $this->iv = $this->encryptor->generateIV();
         return $this;
     }
 
     public function getPassword(): ?string
     {
-        return "******  test u Connection::getPassword";
-        $decryptpassword = $this->encryptor->decrypt($this->password, $this);
-        return $decryptpassword;
+        return $this->password;
+//        $decryptpassword = $this->encryptor->decrypt($this->password, $this);
+//        return $decryptpassword;
     }
 
     /**
@@ -209,8 +195,10 @@ class Connection implements IEncryptable
      */
     public function setPassword(string $password): IEncryptable
     {
-        $this->password = $this->encryptor->encrypt($password, $this);
+        $this->password = $password;
         return $this;
+//        $this->password = $this->encryptor->encrypt($password, $this);
+//        return $this;
     }
 
 }
