@@ -39,7 +39,7 @@ class Encryptor implements EncryptorInterface
     {
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);
 
-        $encryptable->setIv();
+        $encryptable->setIv($this->generateIV());
         $encryptedPassword = openssl_encrypt($stringToBeEncrypted, self::CHIPPER, $passphrase, OPENSSL_RAW_DATA, $encryptable->getIv(), $this->tag);
         return $encryptedPassword;
     }

@@ -175,10 +175,9 @@ class Connection implements IEncryptable
         return $this->iv;
     }
 
-    public function setIv(): IEncryptable
+    public function setIv(string $iv): IEncryptable
     {
-        $this->iv = 'harcodeded';
-//        $this->iv = $this->encryptor->generateIV();
+        $this->iv = $iv;
         return $this;
     }
 

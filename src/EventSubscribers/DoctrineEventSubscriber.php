@@ -8,9 +8,7 @@
 
 namespace App\EventSubscribers;
 
-
-use App\Entity\BDatabase;
-use App\Entity\Connection;
+use App\Entity\Interfaces\IEncryptable;
 use App\Service\EncryptorInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
@@ -19,6 +17,7 @@ use Doctrine\ORM\Events;
 class DoctrineEventSubscriber implements EventSubscriber
 {
     private $encryptor;
+
     public function __construct(EncryptorInterface $encryptor)
     {
         $this->encryptor = $encryptor;
@@ -35,23 +34,13 @@ class DoctrineEventSubscriber implements EventSubscriber
     {
         $entity = $args->getObject();
 
-        if ($entity instanceof Connection)
+        if ($entity instanceof IEncryptable)
         {
-            $entity->setIv();
             $passToBeEncrypted = $entity->getPassword();
             $encryptedPassword = $this->encryptor->encrypt($passToBeEncrypted, $entity);
+            $entity->setPassword($encryptedPassword);
+        }
 
-            $entity->setPassword($encryptedPassword . '-HARDCODED');
-
-            return;
-
-        }elseif ($entity instanceof BDatabase)
-        {
-            $passToBeEncrypted = $entity->getPassword();
-            $entity->setPassword($passToBeEncrypted .'HARDCODED');
-
-            return;
-
-        }else return;
+        return;
     }
 }

@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DatabaseRepository")
  */
-class BDatabase //implements IEncryptable
+class BDatabase implements IEncryptable
 {
     /**
      * @ORM\Id()
@@ -207,9 +207,9 @@ class BDatabase //implements IEncryptable
         return $this->iv;
     }
 
-    public function setIv(): IEncryptable
+    public function setIv(string $iv): IEncryptable
     {
-        $this->iv = $this->encryptor->generateIV();
+        $this->iv = $iv;
         return $this;
     }
 }
