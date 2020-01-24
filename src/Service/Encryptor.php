@@ -9,9 +9,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Encryptor implements EncryptorInterface
 {
-    const CHIPPER = 'AES-128-GCM';
+    const CHIPPER = 'AES128';
     const TAG_LENGHT = 16;
-    const OPTIONS = 0;
     /**
      * @var string
      */
@@ -40,7 +39,7 @@ class Encryptor implements EncryptorInterface
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);
 
         $encryptable->setIv($this->generateIV());
-        $encryptedPassword = openssl_encrypt($stringToBeEncrypted, self::CHIPPER, $passphrase, OPENSSL_RAW_DATA, $encryptable->getIv(), $this->tag);
+        $encryptedPassword = openssl_encrypt($stringToBeEncrypted, self::CHIPPER, $passphrase, 0, $encryptable->getIv());
         return $encryptedPassword;
     }
 
@@ -51,7 +50,11 @@ class Encryptor implements EncryptorInterface
         }
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);
 
-        $originalPassword = openssl_decrypt($stringToBeDecrypted, self::CHIPPER, $passphrase, OPENSSL_RAW_DATA, $encryptable->getIv(), $this->tag);
+        var_dump($encryptable->getIv());
+
+
+
+        $originalPassword = openssl_decrypt($stringToBeDecrypted, self::CHIPPER, $passphrase, 0, $encryptable->getIv());
 
         return $originalPassword;
 
@@ -59,7 +62,7 @@ class Encryptor implements EncryptorInterface
 
     function generateIV(): string
     {
-        return substr(md5(mt_rand()), 0, 10);
+        return substr(md5(mt_rand()), 0, 16);
     }
 
     /**

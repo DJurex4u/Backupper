@@ -68,15 +68,6 @@ class Connection implements IEncryptable
      */
     private $iv;
 
-
-    /**
-     * @var Encryptor $encryptor
-     */
-    private $encryptor;   //TODO: UNUSED
-
-
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -93,8 +84,6 @@ class Connection implements IEncryptable
 
         return $this;
     }
-
-
 
     public function getPort(): ?int
     {
@@ -184,8 +173,6 @@ class Connection implements IEncryptable
     public function getPassword(): ?string
     {
         return $this->password;
-//        $decryptpassword = $this->encryptor->decrypt($this->password, $this);
-//        return $decryptpassword;
     }
 
     /**

@@ -26,7 +26,8 @@ class DoctrineEventSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            Events::prePersist
+            Events::prePersist,
+            Events::postLoad
         );
     }
 
@@ -39,6 +40,26 @@ class DoctrineEventSubscriber implements EventSubscriber
             $passToBeEncrypted = $entity->getPassword();
             $encryptedPassword = $this->encryptor->encrypt($passToBeEncrypted, $entity);
             $entity->setPassword($encryptedPassword);
+        }
+
+        return;
+    }
+
+    public function postLoad(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+
+
+        if ($entity instanceof IEncryptable)
+        {
+            $passToBeDecrypted = $entity->getPassword();
+            echo "<br> Encrypted: ";
+            var_dump($passToBeDecrypted);
+            $decryptedPassword = $this->encryptor->decrypt($passToBeDecrypted, $entity);
+            echo "<br> Decrypted: ";
+            var_dump($decryptedPassword);
+
+            $entity->setPassword($decryptedPassword);
         }
 
         return;

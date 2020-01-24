@@ -119,13 +119,12 @@ class BDatabase implements IEncryptable
 
     public function getPassword(): ?string
     {
-        $decryptpassword = $this->encryptor->decrypt($this->password, $this);
-        return $decryptpassword;
+        return $this->password;
     }
 
     public function setPassword(string $password): IEncryptable
     {
-        $this->password = $this->encryptor->encrypt($password, $this);
+        $this->password = $password;
         return $this;
     }
 
