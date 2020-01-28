@@ -4,10 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\Project;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Service\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -41,9 +42,10 @@ class ProjectController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function readAction(Request $request, int $id)
+    public function readAction(Request $request, int $id, Encryptor $encryptor)
     {
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
+
 
         if (!$project) {
             throw $this->createNotFoundException(

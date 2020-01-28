@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+use App\Entity\Interfaces\IEncryptable;
+use App\Service\Encryptor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -8,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DatabaseRepository")
  */
-class BDatabase
+class BDatabase implements IEncryptable
 {
     /**
      * @ORM\Id()
@@ -62,7 +64,6 @@ class BDatabase
      * @ORM\ManyToOne(targetEntity="App\Entity\PeriodType", inversedBy="bDatabases")
      * @ORM\JoinColumn(nullable=true, name="period_type_id", referencedColumnName="id")
      */
-    //TODO: @Assert\NotNull()
     private $periodType;
 
     /**
@@ -70,6 +71,11 @@ class BDatabase
      * @ORM\OneToMany(targetEntity="Connection", mappedBy="bDatabase")
      */
     private $connections;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $iv;
 
 
     public function __construct() {
@@ -110,10 +116,9 @@ class BDatabase
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): IEncryptable
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -187,6 +192,17 @@ class BDatabase
     {
         $this->connections = $connections;
 
+        return $this;
+    }
+
+    public function getIv(): string
+    {
+        return $this->iv;
+    }
+
+    public function setIv(string $iv): IEncryptable
+    {
+        $this->iv = $iv;
         return $this;
     }
 }

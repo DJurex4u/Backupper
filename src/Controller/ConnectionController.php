@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
+
 /**
  * Class ConnectionController
  * @package App\Controller
@@ -56,6 +57,8 @@ class ConnectionController extends AbstractController
     public function createAction(Request $request, ValidatorInterface $validator, int $id)
     {
         $connection = new Connection();
+
+
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
         if (!$project) {
@@ -70,9 +73,7 @@ class ConnectionController extends AbstractController
             ->add('username', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('dbHostName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])// Password is stored in plain text !!
-
-
+            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
             ->add('save', SubmitType::class, [
                 'label' => 'Create',
                 'attr' => [
@@ -81,11 +82,17 @@ class ConnectionController extends AbstractController
             ])
             ->getForm();
 
+
+
+
         $form->handleRequest($request);
+
+
         $errors = $validator->validate($connection);
 
 
         if ($form->isSubmitted() && $form->isValid() && (count($errors) == 0)) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($connection);
             $entityManager->flush();
@@ -144,5 +151,4 @@ class ConnectionController extends AbstractController
 
         return $this->render('connection/update.html.twig', ['form' => $form->createView(), 'projectId' => $projectId]);
     }
-
 }
