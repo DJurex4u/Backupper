@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Connection;
 use App\Entity\Project;
+use App\Service\SSHConector;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -150,5 +151,17 @@ class ConnectionController extends AbstractController
         }
 
         return $this->render('connection/update.html.twig', ['form' => $form->createView(), 'projectId' => $projectId]);
+    }
+
+    /**
+     * @Route("/test", name="connection_test")
+     * @param Request $request
+     */
+    public function testAction(Request $request)
+    {
+        $connection = $this->getDoctrine()->getRepository(Connection::class)->find(35);
+
+        $sshConnector = new SSHConector($connection);
+        $sshConnector->connectSSH();
     }
 }
