@@ -37,7 +37,7 @@
         {% for connection in project.connections %}
             <tr>
                 <td>{{ connection.username }}  </td>
-                <td>{{ connection.dbHostName }} {{ connection.password }}</td>  {#{{ connection.password }}#}
+                <td>{{ connection.dbHostName }} </td>
                 <td>{{ connection.port }}</td>
                 <td>
                     <form action="{{ path('connection_delete', {id: connection.id}) }}" method="post">

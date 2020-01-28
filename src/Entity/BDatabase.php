@@ -77,15 +77,9 @@ class BDatabase implements IEncryptable
      */
     private $iv;
 
-    /**
-     * @var Encryptor $encryptor
-     */
-    private $encryptor;
 
-
-    public function __construct(Encryptor $encryptor) {
+    public function __construct() {
         $this->connections = new ArrayCollection();
-        $this->encryptor = $encryptor;
     }
 
     public function getId(): ?int

@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Connection;
-use App\Entity\Interfaces\IEncryptable;
 use App\Entity\Project;
-use App\Service\Encryptor;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,12 +52,11 @@ class ConnectionController extends AbstractController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @param int $id
-     * @param Encryptor $encryptor
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request, ValidatorInterface $validator, int $id, Encryptor $encryptor)
+    public function createAction(Request $request, ValidatorInterface $validator, int $id)
     {
-        $connection = new Connection($encryptor);
+        $connection = new Connection();
 
 
         $project = $this->getDoctrine()->getRepository(Project::class)->find($id);

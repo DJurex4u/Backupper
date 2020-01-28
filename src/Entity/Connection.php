@@ -183,8 +183,6 @@ class Connection implements IEncryptable
     {
         $this->password = $password;
         return $this;
-//        $this->password = $this->encryptor->encrypt($password, $this);
-//        return $this;
     }
 
 }

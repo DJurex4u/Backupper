@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: UHP Digital
- * Date: 1/23/2020
- * Time: 3:25 PM
- */
 
 namespace App\EventSubscribers;
 
@@ -53,12 +47,7 @@ class DoctrineEventSubscriber implements EventSubscriber
         if ($entity instanceof IEncryptable)
         {
             $passToBeDecrypted = $entity->getPassword();
-            echo "<br> Encrypted: ";
-            var_dump($passToBeDecrypted);
             $decryptedPassword = $this->encryptor->decrypt($passToBeDecrypted, $entity);
-            echo "<br> Decrypted: ";
-            var_dump($decryptedPassword);
-
             $entity->setPassword($decryptedPassword);
         }
 

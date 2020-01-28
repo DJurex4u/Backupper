@@ -10,18 +10,10 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class Encryptor implements EncryptorInterface
 {
     const CHIPPER = 'AES128';
-    const TAG_LENGHT = 16;
     /**
      * @var string
      */
     private $passphrase;
-
-
-    /**
-     * @var string
-     * idk what $tag does, but openssl_encrypt functiong expects &$tag to write something and needed to be passed to openssl_decrypt to read it
-     */
-    private $tag = '';
 
     /**
      * @var ParameterBagInterface
@@ -49,15 +41,9 @@ class Encryptor implements EncryptorInterface
             return null;
         }
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);
-
-        var_dump($encryptable->getIv());
-
-
-
         $originalPassword = openssl_decrypt($stringToBeDecrypted, self::CHIPPER, $passphrase, 0, $encryptable->getIv());
 
         return $originalPassword;
-
     }
 
     function generateIV(): string
