@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: UHP Digital
- * Date: 1/23/2020
- * Time: 3:25 PM
- */
 
 namespace App\EventSubscribers;
 
@@ -26,7 +20,8 @@ class DoctrineEventSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            Events::prePersist
+            Events::prePersist,
+            Events::postLoad
         );
     }
 
@@ -39,6 +34,21 @@ class DoctrineEventSubscriber implements EventSubscriber
             $passToBeEncrypted = $entity->getPassword();
             $encryptedPassword = $this->encryptor->encrypt($passToBeEncrypted, $entity);
             $entity->setPassword($encryptedPassword);
+        }
+
+        return;
+    }
+
+    public function postLoad(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+
+
+        if ($entity instanceof IEncryptable)
+        {
+            $passToBeDecrypted = $entity->getPassword();
+            $decryptedPassword = $this->encryptor->decrypt($passToBeDecrypted, $entity);
+            $entity->setPassword($decryptedPassword);
         }
 
         return;

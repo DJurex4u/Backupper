@@ -77,15 +77,9 @@ class BDatabase implements IEncryptable
      */
     private $iv;
 
-    /**
-     * @var Encryptor $encryptor
-     */
-    private $encryptor;
 
-
-    public function __construct(Encryptor $encryptor) {
+    public function __construct() {
         $this->connections = new ArrayCollection();
-        $this->encryptor = $encryptor;
     }
 
     public function getId(): ?int
@@ -119,13 +113,12 @@ class BDatabase implements IEncryptable
 
     public function getPassword(): ?string
     {
-        $decryptpassword = $this->encryptor->decrypt($this->password, $this);
-        return $decryptpassword;
+        return $this->password;
     }
 
     public function setPassword(string $password): IEncryptable
     {
-        $this->password = $this->encryptor->encrypt($password, $this);
+        $this->password = $password;
         return $this;
     }
 

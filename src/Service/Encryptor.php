@@ -9,20 +9,11 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Encryptor implements EncryptorInterface
 {
-    const CHIPPER = 'AES-128-GCM';
-    const TAG_LENGHT = 16;
-    const OPTIONS = 0;
+    const CHIPPER = 'AES128';
     /**
      * @var string
      */
     private $passphrase;
-
-
-    /**
-     * @var string
-     * idk what $tag does, but openssl_encrypt functiong expects &$tag to write something and needed to be passed to openssl_decrypt to read it
-     */
-    private $tag = '';
 
     /**
      * @var ParameterBagInterface
@@ -40,7 +31,7 @@ class Encryptor implements EncryptorInterface
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);
 
         $encryptable->setIv($this->generateIV());
-        $encryptedPassword = openssl_encrypt($stringToBeEncrypted, self::CHIPPER, $passphrase, OPENSSL_RAW_DATA, $encryptable->getIv(), $this->tag);
+        $encryptedPassword = openssl_encrypt($stringToBeEncrypted, self::CHIPPER, $passphrase, 0, $encryptable->getIv());
         return $encryptedPassword;
     }
 
@@ -50,16 +41,14 @@ class Encryptor implements EncryptorInterface
             return null;
         }
         $passphrase = $this->fetchEncryptorPassphrase($encryptable);
-
-        $originalPassword = openssl_decrypt($stringToBeDecrypted, self::CHIPPER, $passphrase, OPENSSL_RAW_DATA, $encryptable->getIv(), $this->tag);
+        $originalPassword = openssl_decrypt($stringToBeDecrypted, self::CHIPPER, $passphrase, 0, $encryptable->getIv());
 
         return $originalPassword;
-
     }
 
     function generateIV(): string
     {
-        return substr(md5(mt_rand()), 0, 10);
+        return substr(md5(mt_rand()), 0, 16);
     }
 
     /**
