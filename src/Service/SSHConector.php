@@ -23,10 +23,6 @@ class SSHConector
     private $host;
     private $password;
     private $port;
-    private $databasePort;
-    private $databaseUsername;
-    private $databasePassword;
-    private $databaseServerName;
 
     private $ssh2;
 
@@ -54,12 +50,17 @@ class SSHConector
         $databaseUsername = $database->getUserName();
         $databasePassword = $database->getPassword();
         $databaseServerName = $database->getServerName();
+        $commandTest = '-e "SELECT * FROM user;"';
+        $command = 'mysqldump -c';
 
 
         # korak 1 spojiti se na mysql podatci + ime baze
-        echo $this->ssh2->exec('mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' -e "SELECT * FROM user;"');
+        echo $this->ssh2->exec('mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' '.$commandTest);
+        echo $this->ssh2->exec('mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$command.' '.$databaseServerName);
+
 
         # KORAK 2 napraviti query koji backupa bazu
+//        echo $this->ssh2->exec('mysqldump -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' > ');
         # korak 3 provjeriti file (dali postoji)
         # korak 4 kopirati to na tvoj pc
 //        echo $this->ssh2->exec('mysql -u root -proot mysql -e "SELECT * FROM user;"');
@@ -72,7 +73,6 @@ class SSHConector
 
     public function copyFilesFromRemote()
     {
-
 
 //        echo $this->ssh2->exec('mysql -v');
 
