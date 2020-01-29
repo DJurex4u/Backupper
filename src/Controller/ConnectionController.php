@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\BDatabase;
 use App\Entity\Connection;
 use App\Entity\Project;
 use App\Service\SSHConector;
@@ -160,11 +161,12 @@ class ConnectionController extends AbstractController
     public function testAction(Request $request)
     {
         $connection = $this->getDoctrine()->getRepository(Connection::class)->find(35);
+        $database = $this->getDoctrine()->getRepository(BDatabase::class)->find(18);
 
         $sshConnector = new SSHConector($connection);
         $sshConnector->connectSSH();
 
-        $sshConnector->backupDatabaseOnRemote();
+        $sshConnector->backupDatabaseOnRemote($database);
 
         $sshConnector->copyFilesFromRemote();
 

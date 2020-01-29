@@ -12,6 +12,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . get_include_path().DIRECT
 require ('Net\SSH2.php');
 
 
+use App\Entity\BDatabase;
 use App\Entity\Connection;
 use mysql_xdevapi\Exception;
 use Net_SSH2;
@@ -22,7 +23,10 @@ class SSHConector
     private $host;
     private $password;
     private $port;
-    private $outputMessage;
+    private $databasePort;
+    private $databaseUsername;
+    private $databasePassword;
+    private $databaseServerName;
 
     private $ssh2;
 
@@ -32,7 +36,6 @@ class SSHConector
         $this->host = $connection->getDbHostName();
         $this->password = $connection->getPassword();
         $this->port = $connection->getPort();
-        $this->outputMessage = 'no executed commands yet';
     }
 
     public function connectSSH()
@@ -45,17 +48,21 @@ class SSHConector
     }
 
 
-    public function backupDatabaseOnRemote()
+    public function backupDatabaseOnRemote(BDatabase $database)
     {
-        # korak 1 spojiti se na mysql podatci + ime baze
-        //$this->connectSSH();
-        # KORAK 2 napraviti query koji backupa bazu
+        $databasePort = $database->getPort();   //TODO: implement port into command
+        $databaseUsername = $database->getUserName();
+        $databasePassword = $database->getPassword();
+        $databaseServerName = $database->getServerName();
 
+
+        # korak 1 spojiti se na mysql podatci + ime baze
+        echo $this->ssh2->exec('mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' -e "SELECT * FROM user;"');
+
+        # KORAK 2 napraviti query koji backupa bazu
         # korak 3 provjeriti file (dali postoji)
         # korak 4 kopirati to na tvoj pc
 //        echo $this->ssh2->exec('mysql -u root -proot mysql -e "SELECT * FROM user;"');
-
-
     }
 
     public function copyDatabaseFromRemote()
