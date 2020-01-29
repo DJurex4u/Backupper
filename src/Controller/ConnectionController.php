@@ -163,5 +163,13 @@ class ConnectionController extends AbstractController
 
         $sshConnector = new SSHConector($connection);
         $sshConnector->connectSSH();
+
+        $sshConnector->backupDatabaseOnRemote();
+
+        $sshConnector->copyFilesFromRemote();
+
+
+
+        die('kraj tekst action');
     }
 }

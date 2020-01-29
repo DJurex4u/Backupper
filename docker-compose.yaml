@@ -3,10 +3,11 @@ version: "3.4"
 services:
 
   symfony:
-    build: .
+    image: php:7.3-apache
     container_name: symfony
     volumes:
       - ./:/var/www/app
+      - /docker/app.conf:/var/apache2/sites-available/000-default.conf
     tty: true
     depends_on:
       - db

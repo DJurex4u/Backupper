@@ -7,10 +7,14 @@
  */
 
 namespace App\Service;
+set_include_path(get_include_path() . PATH_SEPARATOR . get_include_path().DIRECTORY_SEPARATOR .'phpseclib1.0.18');
+
+require ('Net\SSH2.php');
 
 
 use App\Entity\Connection;
 use mysql_xdevapi\Exception;
+use Net_SSH2;
 
 class SSHConector
 {
@@ -19,6 +23,8 @@ class SSHConector
     private $password;
     private $port;
     private $outputMessage;
+
+    private $ssh2;
 
     public function __construct(Connection $connection)
     {
@@ -31,32 +37,38 @@ class SSHConector
 
     public function connectSSH()
     {
-
-        $shellCommand = 'sshpass -p buda123 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '.$this->username.'@'.$this->host.' -p '.$this->port;
-         die($shellCommand);
-        //shell_exec($shellCommand);
-//        $kita = [];
-        try {
-
-            $conn = ssh2_connect('root@127.0.0.1', '32769');
-//            ssh2_auth_password($conn, 'root', 'buda123');
-//
-//            dump(ssh2_exec($conn, 'ls -la'));
-        phpinfo();
-
-//            dump(exec('whoami'));
-//            dump(shell_exec($shellCommand . ''));
-//            $result = null;
-//            dump(exec('pwd'));
-//            dump(shell_exec('sshpass -p buda123 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@127.0.0.1 -p 32769 "ls -la"'));
-//            dump(exec('sshpass -p buda123 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@127.0.0.1 -p 32769 "ls -la"', $result));
-//            dump($result);
-//            dump(exec($shellCommand . ' && pwd',$kita));
-//            dump($kita);
-        } catch (Exception $e){
-            die($e->getMessage());
+        $this->ssh2 = new Net_SSH2($this->host, $this->port);
+        if(!$this->ssh2->login($this->username, $this->password))
+        {
+            exit('Login Failed');
         }
-
-        die('kraj');
     }
+
+
+    public function backupDatabaseOnRemote()
+    {
+        # korak 1 spojiti se na mysql podatci + ime baze
+        //$this->connectSSH();
+        # KORAK 2 napraviti query koji backupa bazu
+
+        # korak 3 provjeriti file (dali postoji)
+        # korak 4 kopirati to na tvoj pc
+//        echo $this->ssh2->exec('mysql -u root -proot mysql -e "SELECT * FROM user;"');
+
+
+    }
+
+    public function copyDatabaseFromRemote()
+    {
+
+    }
+
+    public function copyFilesFromRemote()
+    {
+
+
+//        echo $this->ssh2->exec('mysql -v');
+
+    }
+
 }
