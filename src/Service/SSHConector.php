@@ -51,17 +51,26 @@ class SSHConector
         $databasePassword = $database->getPassword();
         $databaseServerName = $database->getServerName();
 
-        $authorisation = 'mysql -u '.$databaseUsername.' -p'.$databasePassword;
-        $sqlQuery1 = $databaseServerName.' -e "SELECT * FROM user;"';
-        $sqlQuery2 = 'mysqldump -c '.$databaseServerName;
+        $authorisation = '-u '.$databaseUsername.' -p'.$databasePassword;
+//        $sqlQuery1 = $databaseServerName.' -e "SELECT * FROM user;"';
+//        $fullHardcodedCommand = 'mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' -e "SELECT * FROM user;"'; //VALJA
+        $exportedFile = $databaseServerName.'.sql';
+        $exportCommand = 'mysqldump '.$authorisation.' '.$databaseServerName.' > '.$exportedFile;
+        $isFoundCommand = 'test -f hello.sql && echo "Your file is in" && pwd || echo "File not found"';
 
 
-        # korak 1 spojiti se na mysql podatci + ime baze
-        echo $this->ssh2->exec($authorisation.' '.$sqlQuery1);
-        echo $this->ssh2->exec($authorisation.' '.$sqlQuery2);
-
-
+        # korak 1 spojiti se na mysql podaci + ime baze
+//        echo $this->ssh2->exec($fullHardcodedCommand);
+//        echo $this->ssh2->exec($authorisation.' '.$sqlQuery1);
         # KORAK 2 napraviti query koji backupa bazu
+
+        //TODO: Check if it is connected to remote?
+        // what if file already exists?
+        echo $this->ssh2->exec($exportCommand);
+        echo $this->ssh2->exec($isFoundCommand);
+
+
+
 //        echo $this->ssh2->exec('mysqldump -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' > ');
         # korak 3 provjeriti file (dali postoji)
         # korak 4 kopirati to na tvoj pc
