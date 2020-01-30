@@ -50,13 +50,15 @@ class SSHConector
         $databaseUsername = $database->getUserName();
         $databasePassword = $database->getPassword();
         $databaseServerName = $database->getServerName();
-        $commandTest = '-e "SELECT * FROM user;"';
-        $command = 'mysqldump -c';
+
+        $authorisation = 'mysql -u '.$databaseUsername.' -p'.$databasePassword;
+        $sqlQuery1 = $databaseServerName.' -e "SELECT * FROM user;"';
+        $sqlQuery2 = 'mysqldump -c '.$databaseServerName;
 
 
         # korak 1 spojiti se na mysql podatci + ime baze
-        echo $this->ssh2->exec('mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' '.$commandTest);
-        echo $this->ssh2->exec('mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$command.' '.$databaseServerName);
+        echo $this->ssh2->exec($authorisation.' '.$sqlQuery1);
+        echo $this->ssh2->exec($authorisation.' '.$sqlQuery2);
 
 
         # KORAK 2 napraviti query koji backupa bazu
