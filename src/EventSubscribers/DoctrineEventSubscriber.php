@@ -21,22 +21,19 @@ class DoctrineEventSubscriber implements EventSubscriber
     {
         return array(
             Events::prePersist,
-            Events::postLoad
+            Events::postLoad,
+            Events::preUpdate
         );
     }
 
     public function prePersist(LifecycleEventArgs $args)
     {
-        $entity = $args->getObject();
+        $this->encrypt($args);
+    }
 
-        if ($entity instanceof IEncryptable)
-        {
-            $passToBeEncrypted = $entity->getPassword();
-            $encryptedPassword = $this->encryptor->encrypt($passToBeEncrypted, $entity);
-            $entity->setPassword($encryptedPassword);
-        }
-
-        return;
+    public function preUpdate(LifecycleEventArgs $args)
+    {
+        $this->encrypt($args);
     }
 
     public function postLoad(LifecycleEventArgs $args)
@@ -49,6 +46,20 @@ class DoctrineEventSubscriber implements EventSubscriber
             $passToBeDecrypted = $entity->getPassword();
             $decryptedPassword = $this->encryptor->decrypt($passToBeDecrypted, $entity);
             $entity->setPassword($decryptedPassword);
+        }
+
+        return;
+    }
+
+    public function encrypt(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+
+        if ($entity instanceof IEncryptable)
+        {
+            $passToBeEncrypted = $entity->getPassword();
+            $encryptedPassword = $this->encryptor->encrypt($passToBeEncrypted, $entity);
+            $entity->setPassword($encryptedPassword);
         }
 
         return;
