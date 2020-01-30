@@ -69,6 +69,10 @@ class SSHConector
         echo $this->ssh2->exec($exportCommand);
         echo $this->ssh2->exec($isFoundCommand);
 
+        if ($isFoundCommand){
+
+        }
+
 
 
 //        echo $this->ssh2->exec('mysqldump -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' > ');
