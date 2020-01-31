@@ -47,7 +47,13 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/"
-        }
+        },
+        "classmap": [
+            "lib/phpseclib1.0.18"
+        ],
+        "files": [
+            "lib/phpseclib1.0.18/Crypt/Random.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

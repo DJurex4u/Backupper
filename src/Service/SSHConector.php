@@ -7,14 +7,10 @@
  */
 
 namespace App\Service;
-set_include_path(get_include_path() . PATH_SEPARATOR . get_include_path().DIRECTORY_SEPARATOR .'phpseclib1.0.18');
-
-require ('Net\SSH2.php');
 
 
 use App\Entity\BDatabase;
 use App\Entity\Connection;
-use mysql_xdevapi\Exception;
 use Net_SSH2;
 
 class SSHConector
@@ -24,6 +20,9 @@ class SSHConector
     private $password;
     private $port;
 
+    /**
+     * @var Net_SSH2
+     */
     private $ssh2;
 
     public function __construct(Connection $connection)
@@ -59,17 +58,15 @@ class SSHConector
         $isFoundCommand = 'test -f '.$exportedFile.' && echo "Your file is in" && pwd || echo "File not found"';
 
 
-        # korak 1 spojiti se na mysql podaci + ime baze
-//        echo $this->ssh2->exec($fullHardcodedCommand);
-//        echo $this->ssh2->exec($authorisation.' '.$sqlQuery1);
         # KORAK 2 napraviti query koji backupa bazu
-
         //TODO: Check if it is connected to remote?
         // what if file already exists?
         echo $this->ssh2->exec($exportCommand);
         echo $this->ssh2->exec($isFoundCommand);
+        die("tusam");
 
         if ($isFoundCommand){
+            $rsyncCommand = '';
         }
 
 
