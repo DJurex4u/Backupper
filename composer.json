@@ -52,7 +52,8 @@
             "lib/phpseclib1.0.18"
         ],
         "files": [
-            "lib/phpseclib1.0.18/Crypt/Random.php"
+            "lib/phpseclib1.0.18/Crypt/Random.php",
+            "lib/phpseclib1.0.18/Crypt/Base.php"
         ]
     },
     "autoload-dev": {

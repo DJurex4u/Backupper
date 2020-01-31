@@ -12,6 +12,8 @@ namespace App\Service;
 use App\Entity\BDatabase;
 use App\Entity\Connection;
 use Net_SSH2;
+use Symfony\Component\Process\InputStream;
+use Symfony\Component\Process\Process;
 
 class SSHConector
 {
@@ -63,11 +65,39 @@ class SSHConector
         // what if file already exists?
         echo $this->ssh2->exec($exportCommand);
         echo $this->ssh2->exec($isFoundCommand);
+
+
+//        scp -P 32768 -pbuda123 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"
+//        sshpass -p buda123" scp -P 32768 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"
+//        $scpCommand = 'scp '.$authorisation.' -P 32768 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"';
+        $remoteFilePath = '/root/'.$exportedFile; //TODO: get path when creating the file
+        $localDirectory = 'C:\Users\UHP Digital\Desktop\tuPosalji';
+        $scpCommand = 'scp -P '.$databasePort.' '.$databaseUsername.'@'.$this->host.':"'.$remoteFilePath.'" "'.$localDirectory.'"';
+
+        $input = new InputStream();
+
+        $process = new Process([$scpCommand]);
+//        $process = Process::fromShellCommandline($scpCommand);
+//        $process->run(null, ['name' => 'scp exported database']);
+        $process->setInput($input);
+        $process->run();
+        $input->write('buda123');
+
+        $input->write('buda123');
+        $input->close();
+        echo $process->getOutput();
+
+        $process->wait();
+//        $process = new Process("scp -P port username@ip-adresa:/path/do/fajla lokalni/dir");
+//        $process->start();
+//        $process->wait();
+
+        dump($process->getOutput());
         die("tusam");
 
-        if ($isFoundCommand){
-            $rsyncCommand = '';
-        }
+//        if ($isFoundCommand){
+//
+//        }
 
 
 
