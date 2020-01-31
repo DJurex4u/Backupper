@@ -172,6 +172,6 @@ class ConnectionController extends AbstractController
 
 
 
-        die('kraj testAction');
+        die("kraj testAction");
     }
 }

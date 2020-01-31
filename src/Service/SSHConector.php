@@ -56,7 +56,7 @@ class SSHConector
 //        $fullHardcodedCommand = 'mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' -e "SELECT * FROM user;"'; //VALJA
         $exportedFile = $databaseServerName.'.sql';
         $exportCommand = 'mysqldump '.$authorisation.' '.$databaseServerName.' > '.$exportedFile;
-        $isFoundCommand = 'test -f hello.sql && echo "Your file is in" && pwd || echo "File not found"';
+        $isFoundCommand = 'test -f '.$exportedFile.' && echo "Your file is in" && pwd || echo "File not found"';
 
 
         # korak 1 spojiti se na mysql podaci + ime baze
@@ -70,7 +70,6 @@ class SSHConector
         echo $this->ssh2->exec($isFoundCommand);
 
         if ($isFoundCommand){
-
         }
 
 
