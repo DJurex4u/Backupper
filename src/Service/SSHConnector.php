@@ -42,9 +42,6 @@ class SSHConnector
         $this->ssh2 = new Net_SSH2($this->host, $this->port);
         $key = new Crypt_RSA();
         $key->loadKey(file_get_contents('C:\Users\UHP Digital\.ssh\id_rsa'));
-//        echo file_get_contents('C:\Users\UHP Digital\.ssh\id_rsa');
-//
-////        die();
 
         if(!$this->ssh2->login($this->username, $key))
         {
@@ -55,52 +52,34 @@ class SSHConnector
 
     public function backupDatabaseOnRemote(BDatabase $database)
     {
-        $databasePort = $database->getPort();   //TODO: implement port into command
+        $databasePort = $database->getPort();
         $databaseUsername = $database->getUserName();
         $databasePassword = $database->getPassword();
         $databaseServerName = $database->getServerName();
 
-        $authorisation = '-u '.$databaseUsername.' -p'.$databasePassword;
-//        $sqlQuery1 = $databaseServerName.' -e "SELECT * FROM user;"';
-//        $fullHardcodedCommand = 'mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' -e "SELECT * FROM user;"'; //VALJA
+
+        $authorisation = '-u '.$databaseUsername.' -p'.$databasePassword.' -P '.$databasePort;
         $exportedFileName = $databaseServerName.'.sql';
-        $exportCommand = 'mysqldump '.$authorisation.' '.$databaseServerName.' > '.$exportedFileName;
-        $isFoundCommand = 'test -f '.$exportedFileName.' && echo "Your file is in" && pwd || echo "File not found"';
+        $exportCommand = 'mysqldump '.$authorisation.' '.$databaseServerName.' > '.$exportedFileName;  //TODO: this executes (and creates empty file) even if authorisation to myslq have failed
 
+        $isFoundCommand = 'test -f '.$exportedFileName.' && echo "<br>Your file is in" && pwd  "</br>" || echo "<br>File not created</br>"';
 
-        # KORAK 2 napraviti query koji backupa bazu
-        //TODO: Check if it is connected to remote?
-        // what if file already exists?
-        echo $this->ssh2->exec($exportCommand);
+        echo "<br>".$this->ssh2->exec($exportCommand)."</br>";
         echo $this->ssh2->exec($isFoundCommand);
 
+        $remoteFilePath = '/root/'.$exportedFileName;
+        $localDirectory = 'C:\Users\UHP Digital\Desktop\tuPosalji';  //TODO: read from ..?
 
-//        scp -P 32768 -pbuda123 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"  //ovo ide, ali ne može lozinku skupit
-//        sshpass -p buda123 scp -P 32768 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"  //ovo valja, ali moraš imat sshpass
-        $remoteFilePath = '/root/'.$exportedFileName; //TODO: get path when creating the file
-        $localDirectory = 'C:\Users\UHP Digital\Desktop\tuPosalji';
-        $scpCommand = 'scp -P '.$databasePort.' '.$databaseUsername.'@'.$this->host.':"'.$remoteFilePath.'" "'.$localDirectory.'"';
+        $scpCommand = 'scp -P '.$this->port.' '.$databaseUsername.'@'.$this->host.':"'.$remoteFilePath.'" "'.$localDirectory.'"';
 
-        echo $scpCommand;
+       //echo $scpCommand;
+        if(!exec($scpCommand)){
+            echo '<br>file successfully saved to '.$localDirectory.'</br>';
+        }
 
-        $process = new Process([$scpCommand]);
-        $process->setInput($databasePassword);
-        $process->start();
-        $process->wait();
-
-        echo $process->getOutput();
-        dump($process->getOutput());
-        die("KRAJ");
-
-
-
-
-
-//        echo $this->ssh2->exec('mysqldump -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' > ');
-        # korak 3 provjeriti file (dali postoji)
-        # korak 4 kopirati to na tvoj pc
-//        echo $this->ssh2->exec('mysql -u root -proot mysql -e "SELECT * FROM user;"');
+        #provjeriti jel filesize odgovara
     }
+
 
     public function copyDatabaseFromRemote()
     {
