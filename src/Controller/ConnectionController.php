@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\BDatabase;
 use App\Entity\Connection;
 use App\Entity\Project;
-use App\Service\SSHConector;
+use App\Service\SSHConnector;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -160,10 +160,11 @@ class ConnectionController extends AbstractController
      */
     public function testAction(Request $request)
     {
+        //TODO: hardcoded id
         $connection = $this->getDoctrine()->getRepository(Connection::class)->find(35);
         $database = $this->getDoctrine()->getRepository(BDatabase::class)->find(18);
 
-        $sshConnector = new SSHConector($connection);
+        $sshConnector = new SSHConnector($connection);
         $sshConnector->connectSSH();
 
         $sshConnector->backupDatabaseOnRemote($database);

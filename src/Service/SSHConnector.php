@@ -12,10 +12,12 @@ namespace App\Service;
 use App\Entity\BDatabase;
 use App\Entity\Connection;
 use Net_SSH2;
+use Crypt_RSA;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\InputStream;
 use Symfony\Component\Process\Process;
 
-class SSHConector
+class SSHConnector
 {
     private $username;
     private $host;
@@ -38,7 +40,13 @@ class SSHConector
     public function connectSSH()
     {
         $this->ssh2 = new Net_SSH2($this->host, $this->port);
-        if(!$this->ssh2->login($this->username, $this->password))
+        $key = new Crypt_RSA();
+        $key->loadKey(file_get_contents('C:\Users\UHP Digital\.ssh\id_rsa'));
+//        echo file_get_contents('C:\Users\UHP Digital\.ssh\id_rsa');
+//
+////        die();
+
+        if(!$this->ssh2->login($this->username, $key))
         {
             exit('Login Failed');
         }
@@ -55,9 +63,9 @@ class SSHConector
         $authorisation = '-u '.$databaseUsername.' -p'.$databasePassword;
 //        $sqlQuery1 = $databaseServerName.' -e "SELECT * FROM user;"';
 //        $fullHardcodedCommand = 'mysql -u '.$databaseUsername.' -p'.$databasePassword.' '.$databaseServerName.' -e "SELECT * FROM user;"'; //VALJA
-        $exportedFile = $databaseServerName.'.sql';
-        $exportCommand = 'mysqldump '.$authorisation.' '.$databaseServerName.' > '.$exportedFile;
-        $isFoundCommand = 'test -f '.$exportedFile.' && echo "Your file is in" && pwd || echo "File not found"';
+        $exportedFileName = $databaseServerName.'.sql';
+        $exportCommand = 'mysqldump '.$authorisation.' '.$databaseServerName.' > '.$exportedFileName;
+        $isFoundCommand = 'test -f '.$exportedFileName.' && echo "Your file is in" && pwd || echo "File not found"';
 
 
         # KORAK 2 napraviti query koji backupa bazu
@@ -67,37 +75,24 @@ class SSHConector
         echo $this->ssh2->exec($isFoundCommand);
 
 
-//        scp -P 32768 -pbuda123 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"
-//        sshpass -p buda123" scp -P 32768 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"
-//        $scpCommand = 'scp '.$authorisation.' -P 32768 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"';
-        $remoteFilePath = '/root/'.$exportedFile; //TODO: get path when creating the file
+//        scp -P 32768 -pbuda123 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"  //ovo ide, ali ne može lozinku skupit
+//        sshpass -p buda123 scp -P 32768 root@127.0.0.1:"/root/mysql.sql" "C:\Users\UHP Digital\Desktop\tuPosalji"  //ovo valja, ali moraš imat sshpass
+        $remoteFilePath = '/root/'.$exportedFileName; //TODO: get path when creating the file
         $localDirectory = 'C:\Users\UHP Digital\Desktop\tuPosalji';
         $scpCommand = 'scp -P '.$databasePort.' '.$databaseUsername.'@'.$this->host.':"'.$remoteFilePath.'" "'.$localDirectory.'"';
 
-        $input = new InputStream();
+        echo $scpCommand;
 
         $process = new Process([$scpCommand]);
-//        $process = Process::fromShellCommandline($scpCommand);
-//        $process->run(null, ['name' => 'scp exported database']);
-        $process->setInput($input);
-        $process->run();
-        $input->write('buda123');
-
-        $input->write('buda123');
-        $input->close();
-        echo $process->getOutput();
-
+        $process->setInput($databasePassword);
+        $process->start();
         $process->wait();
-//        $process = new Process("scp -P port username@ip-adresa:/path/do/fajla lokalni/dir");
-//        $process->start();
-//        $process->wait();
 
+        echo $process->getOutput();
         dump($process->getOutput());
-        die("tusam");
+        die("KRAJ");
 
-//        if ($isFoundCommand){
-//
-//        }
+
 
 
 
