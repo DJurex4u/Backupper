@@ -9,6 +9,7 @@
 namespace App\Service;
 
 
+use App\Entity\BData;
 use App\Entity\BDatabase;
 use App\Entity\Connection;
 use Net_SSH2;
@@ -62,9 +63,9 @@ class SSHConnector
         $exportedFileName = $databaseServerName.'.sql';
         $exportCommand = 'mysqldump '.$authorisation.' '.$databaseServerName.' > '.$exportedFileName;  //TODO: this executes (and creates empty file) even if authorisation to myslq have failed
 
-        $isFoundCommand = 'test -f '.$exportedFileName.' && echo "<br>Your file is in" && pwd  "</br>" || echo "<br>File not created</br>"';
+        $isFoundCommand = 'test -f '.$exportedFileName.' && echo "<br>Your file is in" && pwd  || echo "<br>File not created"';
 
-        echo "<br>".$this->ssh2->exec($exportCommand)."</br>";
+        echo "<br>".$this->ssh2->exec($exportCommand);
         echo $this->ssh2->exec($isFoundCommand);
 
         $remoteFilePath = '/root/'.$exportedFileName;
@@ -74,7 +75,7 @@ class SSHConnector
 
        //echo $scpCommand;
         if(!exec($scpCommand)){
-            echo '<br>file successfully saved to '.$localDirectory.'</br>';
+            echo '<br>file successfully saved to '.$localDirectory;
         }
 
         #provjeriti jel filesize odgovara
@@ -86,8 +87,14 @@ class SSHConnector
 
     }
 
-    public function copyFilesFromRemote()
+    public function copyFilesFromRemote(BData $bData)
     {
+        $scpCommand = 'scp -r -P '.$this->port.' '.$this->username.'@'.$this->host.':"'.$bData->getSourceDirectory().'" "'.$bData->getDestinationDirectory().'"';
+//        echo '<br>'.$scpCommand;
+        if(!exec($scpCommand)){
+            echo '<br>file successfully saved to '.$bData->getDestinationDirectory();
+        }
+
 
 //        echo $this->ssh2->exec('mysql -v');
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\BData;
 use App\Entity\BDatabase;
 use App\Entity\Connection;
 use App\Entity\Project;
@@ -162,17 +163,18 @@ class ConnectionController extends AbstractController
     {
         //TODO: hardcoded id
         $connection = $this->getDoctrine()->getRepository(Connection::class)->find(35);
-        $database = $this->getDoctrine()->getRepository(BDatabase::class)->find(18);
+        $bDatabase = $this->getDoctrine()->getRepository(BDatabase::class)->find(18);
+        $bData = $this->getDoctrine()->getRepository(BData::class)->find(12);
 
         $sshConnector = new SSHConnector($connection);
         $sshConnector->connectSSH();
 
-        $sshConnector->backupDatabaseOnRemote($database);
+        $sshConnector->backupDatabaseOnRemote($bDatabase);
 
-        $sshConnector->copyFilesFromRemote();
+        $sshConnector->copyFilesFromRemote($bData);
 
 
 
-        die("<br> kraj testAction </br>");
+        die("<br> kraj testAction");
     }
 }
