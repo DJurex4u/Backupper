@@ -68,9 +68,7 @@
             <th>Username</th>
             <th>Server Name</th>
             <th>DB Name</th>
-            <th>Driver</th>
             <th>Port</th>
-            <th>DB Scheme</th>
             <th>Destination</th>
             <th>Action</th>
         </tr>
@@ -81,9 +79,7 @@
                 <td>{{ bDatabase.username }}</td>
                 <td>{{ bDatabase.serverName }}</td>
                 <td>{{ bDatabase.dbName }}</td>
-                <td>{{ bDatabase.driver }}</td>
                 <td>{{ bDatabase.port }}</td>
-                <td>{{ bDatabase.dbSchema }}</td>
                 <td>{{ bDatabase.destinationPath }}</td>
                 <td>
                     <form action="{{ path('bDatabase_delete', {id: bDatabase.id}) }}" method="post">

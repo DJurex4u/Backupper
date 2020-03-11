@@ -28,25 +28,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class BDatabaseController extends AbstractController
 {
-    // TODO Needs to be refactored :(
-    const  DB_DRIVER_LIST = [
-        'none' => 'none',
-        'ODBC' => 'ODBC'
-    ];
-
-    const DB_SCHEMA_LIST = [
-        'none' => 'none',
-        'ANSI' => 'ANSI',
-        'DB2' => 'DB2',
-        'MAXDB' => 'MAXDB',
-        'MYSQL323' => 'MYSQL323',
-        'MYSQL40' => 'MYSQL40',
-        'MSSQL' => 'MSSQL',
-        'ORACLE' => 'ORACLE',
-        'TRADITIONAL' => 'TRADITIONAL'
-    ];
-
-
     /**
      * @Route("/delete/{id}", name="bDatabase_delete", methods={"POST"})
      * @param Request $request
@@ -96,9 +77,7 @@ class BDatabaseController extends AbstractController
             ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
             ->add('dbName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('destinationPath', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('driver', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_DRIVER_LIST])
             ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('dbSchema', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_SCHEMA_LIST])
             //TODO: periodType = NULL
 
             ->add('save', SubmitType::class, [
@@ -149,9 +128,7 @@ class BDatabaseController extends AbstractController
             ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
             ->add('dbName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('destinationPath', TextType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('driver', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_DRIVER_LIST])
             ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('dbSchema', ChoiceType::class, ['attr' => ['class' => 'ml-4'], 'choices' => self::DB_SCHEMA_LIST])
             //TODO: periodType = NULL
 
             ->add('save', SubmitType::class, [

@@ -38,19 +38,9 @@ class BDatabase implements IEncryptable
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $driver;
-
-    /**
-     * @ORM\Column(type="string", length=255)
      * @Assert\NotNull()
      */
     private $port;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $dbSchema;
 
     /**
      * @ORM\Column(type="string", length=255)
