@@ -129,7 +129,9 @@ class ConnectionController extends AbstractController
             ->add('username', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('dbHostName', TextType::class, ['attr' => ['class' => 'ml-4']])
             ->add('port', IntegerType::class, ['attr' => ['class' => 'ml-4']])
-            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])// Password is stored in plain text !!
+            ->add('password', PasswordType::class, ['attr' => ['class' => 'ml-4']])
+            ->add('sshPrivateKey', TextType::class, ['attr' => ['class' => 'ml-4']])
+
 
 
             ->add('save', SubmitType::class, [
