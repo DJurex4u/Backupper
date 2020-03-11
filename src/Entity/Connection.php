@@ -33,7 +33,7 @@ class Connection implements IEncryptable
     private $password;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $sshPrivateKey;
 

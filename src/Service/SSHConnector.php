@@ -44,13 +44,16 @@ class SSHConnector
         $key = new Crypt_RSA();
 //        $key->loadKey(file_get_contents('C:\Users\UHP Digital\.ssh\id_rsa'));
         $key->loadKey($this->sshPrivateKey);
-        if(!$this->ssh2->login($this->username, $key))
-        {
-//            if(!$this->ssh2->login($this->username, $this->password))
-//            {
-                exit('Login Failed');
-//            }
+
+        if(!$this->ssh2->isConnected()){
+            echo ("Connecting to: ".$this->host.":".$this->port);
+            dump($key);
+            if(!$this->ssh2->login($this->username, $key))
+            {
+                exit('<br>Login Failed');
+            }
         }
+
     }
 
 
