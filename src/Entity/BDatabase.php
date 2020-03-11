@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 use App\Entity\Interfaces\IEncryptable;
-use App\Service\Encryptor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -52,6 +51,16 @@ class BDatabase implements IEncryptable
      * @ORM\Column(type="string", length=255)
      */
     private $dbSchema;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $dbName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $destinationPath;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="bDatabases")
@@ -205,4 +214,37 @@ class BDatabase implements IEncryptable
         $this->iv = $iv;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDbName()
+    {
+        return $this->dbName;
+    }
+
+    /**
+     * @param mixed $dbName
+     */
+    public function setDbName($dbName): void
+    {
+        $this->dbName = $dbName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestinationPath()
+    {
+        return $this->destinationPath;
+    }
+
+    /**
+     * @param mixed $destinationPath
+     */
+    public function setDestinationPath($destinationPath): void
+    {
+        $this->destinationPath = $destinationPath;
+    }
+
 }
