@@ -33,6 +33,11 @@ class Connection implements IEncryptable
     private $password;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $sshPrivateKey;
+
+    /**
      * @ORM\Column(type="integer", length=255)
      * @Assert\NotNull()
      */
@@ -183,6 +188,27 @@ class Connection implements IEncryptable
     {
         $this->password = $password;
         return $this;
+    }
+
+
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getSshPrivateKey()
+    {
+        return $this->sshPrivateKey;
+    }
+
+    /**
+     * @param mixed $sshPrivateKey
+     */
+    public function setSshPrivateKey($sshPrivateKey): void
+    {
+        $this->sshPrivateKey = $sshPrivateKey;
     }
 
 }
