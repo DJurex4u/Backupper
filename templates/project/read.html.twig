@@ -65,22 +65,26 @@
         <table class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
             <th>Username</th>
+            <th>Server Name</th>
+            <th>DB Name</th>
             <th>Driver</th>
             <th>Port</th>
             <th>DB Scheme</th>
+            <th>Destination</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         {% for bDatabase in project.bDatabases %}
             <tr>
-                <td>{{ bDatabase.serverName }}</td>
                 <td>{{ bDatabase.username }}</td>
+                <td>{{ bDatabase.serverName }}</td>
+                <td>{{ bDatabase.dbName }}</td>
                 <td>{{ bDatabase.driver }}</td>
                 <td>{{ bDatabase.port }}</td>
                 <td>{{ bDatabase.dbSchema }}</td>
+                <td>{{ bDatabase.destinationPath }}</td>
                 <td>
                     <form action="{{ path('bDatabase_delete', {id: bDatabase.id}) }}" method="post">
                         <a href=" {{ path('bDatabase_update', {id: bDatabase.id}) }} " class="btn btn-light">Update</a>
