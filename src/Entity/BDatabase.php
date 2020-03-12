@@ -206,7 +206,7 @@ class BDatabase implements IEncryptable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDbName()
     {
@@ -214,7 +214,7 @@ class BDatabase implements IEncryptable
     }
 
     /**
-     * @param mixed $dbName
+     * @param string $dbName
      */
     public function setDbName($dbName): void
     {
@@ -222,7 +222,7 @@ class BDatabase implements IEncryptable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDestinationPath()
     {
@@ -230,7 +230,7 @@ class BDatabase implements IEncryptable
     }
 
     /**
-     * @param mixed $destinationPath
+     * @param string $destinationPath
      */
     public function setDestinationPath($destinationPath): void
     {

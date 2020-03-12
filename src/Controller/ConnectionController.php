@@ -156,27 +156,4 @@ class ConnectionController extends AbstractController
 
         return $this->render('connection/update.html.twig', ['form' => $form->createView(), 'projectId' => $projectId]);
     }
-
-    /**
-     * @Route("/test", name="connection_test")
-     * @param Request $request
-     */
-    public function testAction(Request $request)
-    {
-        //TODO: hardcoded id
-        $connection = $this->getDoctrine()->getRepository(Connection::class)->find(35);
-        $bDatabase = $this->getDoctrine()->getRepository(BDatabase::class)->find(18);
-        $bData = $this->getDoctrine()->getRepository(BData::class)->find(12);
-
-        $sshConnector = new SSHConnector($connection);
-        $sshConnector->connectSSH();
-
-        $sshConnector->backupDatabaseOnRemote($bDatabase);
-
-        $sshConnector->copyFilesFromRemote($bData);
-
-
-
-        die("<br> kraj testAction");
-    }
 }

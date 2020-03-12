@@ -42,12 +42,10 @@ class SSHConnector
     {
         $this->ssh2 = new Net_SSH2($this->host, $this->port);
         $key = new Crypt_RSA();
-//        $key->loadKey(file_get_contents('C:\Users\UHP Digital\.ssh\id_rsa'));
         $key->loadKey($this->sshPrivateKey);
 
         if(!$this->ssh2->isConnected()){
             echo ("Connecting to: ".$this->host.":".$this->port);
-            dump($key);
             if(!$this->ssh2->login($this->username, $key))
             {
                 exit('<br>Login Failed');
@@ -64,7 +62,6 @@ class SSHConnector
         $databaseServerName = $database->getServerName();
         $databasePort = $database->getPort();
         $databaseName = $database->getDbName();
-        $localDirectory = $database->getDestinationPath();
 
 
         $authorisation = '-u '.$databaseUsername.' -p'.$databasePassword.' -P '.$databasePort;
@@ -75,24 +72,28 @@ class SSHConnector
 
         echo "<br>".$this->ssh2->exec($exportCommand);
         echo $this->ssh2->exec($isFoundCommand);
+    }
 
+
+    public function copyDatabaseFromRemote(BDatabase $database)
+    {
+        $databaseUsername = $database->getUserName();
+        $databaseServerName = $database->getServerName();
+        $databaseName = $database->getDbName();
+        $localDirectory = $database->getDestinationPath();
+
+        $exportedFileName = $databaseName.'.sql';
         $remoteFilePath = '/root/'.$exportedFileName;
-        //$localDirectory = 'C:\Users\UHP Digital\Desktop\tuPosalji';  //TODO: read from ..?
+        //$localDirectory = 'C:\Users\UHP Digital\Desktop\tuPosalji';
 
         $scpCommand = 'scp -P '.$this->port.' '.$databaseUsername.'@'.$databaseServerName.':"'.$remoteFilePath.'" "'.$localDirectory.'"';
 
-       //echo $scpCommand;
+        //echo $scpCommand;
         if(!exec($scpCommand)){
             echo '<br>file successfully saved to '.$localDirectory;
         }
 
         #provjeriti jel filesize odgovara
-    }
-
-
-    public function copyDatabaseFromRemote()
-    {
-
     }
 
     public function copyFilesFromRemote(BData $bData)

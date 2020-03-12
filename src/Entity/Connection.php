@@ -196,7 +196,7 @@ class Connection implements IEncryptable
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSshPrivateKey()
     {
@@ -204,11 +204,13 @@ class Connection implements IEncryptable
     }
 
     /**
-     * @param mixed $sshPrivateKey
+     * @param string $sshPrivateKey
+     * @return Connection
      */
-    public function setSshPrivateKey($sshPrivateKey): void
+    public function setSshPrivateKey($sshPrivateKey): self
     {
         $this->sshPrivateKey = $sshPrivateKey;
+        return $this;
     }
 
 }
